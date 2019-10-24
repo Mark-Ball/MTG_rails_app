@@ -12,7 +12,7 @@
 
 ## Peer-to-peer selling
 
-##  Easy to list, easy to buy
+## Easy to list, easy to buy
 
 ## Secure system
 
