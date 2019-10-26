@@ -38,6 +38,14 @@ MTG-marketplace allows players to buy specific cards, bypassing the regular card
 
 ## User stories
 
+1. As a buyer, I want to be able to search all listings, so I may find the individual card I need
+2. As a seller, I want to be able to see the prices that a card is selling at, so that I may price my card most appropriately
+3. As a seller, I want to be able to modify my listing after it is posted, so that I may correct any mistaken details I have entered
+4. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs
+5. As someone speculating on Magic cards without actually playing, I want to be able to see the prices that cards are selling at, so that I may identify an opportunity for profit
+6. As both a buyer and a seller, I want the site to handle payment, so I don't have to deal with obtaining money from someone I don't know
+7. As a buyer, I want to be able to enter my delivery details once, so that I may save time on multiple transactions
+
 # Features
 
 ## Peer-to-peer selling
@@ -69,4 +77,4 @@ It is important to have a database of all Magic cards for this projects so that 
 
 magicthegathering.io provides endpoints for groups of cards (this is the main endpoint which was used for MTG-marketplace), individual cards, all sets, individual sets, the content of booster packs, a list of card types (e.g. creatures, land, sorcery) and more. The API is rate-limited to 5,000 requests per hour. 
 
-Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers.`
+Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers.
