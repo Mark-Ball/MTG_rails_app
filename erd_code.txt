@@ -1,0 +1,91 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table users as U {
+  id int [pk, increment] // auto-increment
+  first_name string
+  last_name string
+  alias string
+  email string
+  encrypted_password string
+}
+
+Table cards {
+  id int [pk]
+  name string
+  manacost int
+  rarity string
+  set string
+  text text
+  artist string
+  power int
+  toughness int
+  imageUrl varchar
+  users_id int
+}
+
+Ref: cards.users_id > U.id
+
+Table colors {
+  id int [pk]
+  color string
+ }
+ 
+Table cards_colors {
+  cards_id int
+  colors_id int
+ }
+ 
+Ref: cards_colors.colors_id > colors.id
+Ref: cards_colors.cards_id > cards.id
+
+Table addresses {
+  id int [pk]
+  street_number int
+  street string
+  suburb string
+  city string
+  country string
+  postcode int
+  users_id int
+}
+
+Ref: addresses.users_id - users.id
+
+Table all_cards {
+  id int [pk]
+  name string
+  names array
+  manacost int
+  cmc int
+  colors array
+  colorIdentity array
+  card_type string
+  supertypes array
+  types array
+  subtypes array
+  rarity string
+  set string
+  text text
+  artist string
+  number string
+  power int
+  toughness int
+  layout string
+  multiverseid int
+  imageUrl varchar
+  rulings array
+  foreignNames array
+  printings string
+  originalText text
+  originalType string
+  card_id string
+}
+
+Ref: all_cards.id - cards.id
+
+Table images {
+  id int [pk]
+  
+}
