@@ -43,18 +43,60 @@ MTG-marketplace allows players to buy specific cards, bypassing the regular card
 3. As a seller, I want to be able to modify my listing after it is posted, so that I may correct any mistaken details I have entered
 4. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs
 5. As someone speculating on Magic cards without actually playing, I want to be able to see the prices that cards are selling at, so that I may identify an opportunity for profit
-6. As both a buyer and a seller, I want the site to handle payment, so I don't have to deal with obtaining money from someone I don't know
+6. As both a buyer and a seller, I want the site to handle payment, so I don't have to worry about it
 7. As a buyer, I want to be able to enter my delivery details once, so that I may save time on multiple transactions
+8. As a seller, I want the website to identify the full card information with as little input from me as possible, so I don't have to manually enter all the details myself
+9. As a buyer, I want the website to check that the details of all cards listed for sale are correct, so I am protected from fraud
 
-# Features
+## The database structure
 
-## Peer-to-peer selling
+MTG-marketplace uses the PostgreSQL database for the persistent storage of data. The following tables are included:
+- users
+- addresses
+- cards
+- colors
+- cards_colors
+- all_cards
+- images
 
-## Easy to list, easy to buy
+For all tables, the attributes collected can be viewed in the ERD diagram in the following section. 
 
-## Secure system
+The users table exists to store information regarding individual buyers and sellers on the site.
 
-## Seller reviews
+The addresses table exists to store the postage address of each user so that sellers know where to send any purchased cards.
+
+The relationship between users and addresses is:
+- <strong>a user has one address
+- an address belongs to a user</strong>
+
+The cards table holds the details of all cards listed on the website.
+
+The relationship between users and cards is:
+- <strong>a user has many cards
+- a card belongs to a user</strong>
+
+The colours table holds a list of the five colors used in Magic, as well as colorless. This table is used to provide information about the color of individual cards rather than add six additional attributes to each card. Colors is connected to cards by the join table cards_colors.
+
+The relationship between cards and colors are:
+- <strong>a card has many cards_colors
+- a card has many colors, through cards_colors
+- a color has many cards_colors
+- a color has many cards, through cards_colors</strong>
+
+The all_cards table exists to hold all the information for all Magic cards in existance. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the entire set of Magic cards has been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are not relying on a third party.
+
+The relationship between all_cards and cards is:
+- <strong>cards belongs to all_cards
+- all_cards has many cards</strong>
+
+The last table in the database structure is images, which is used to store images of both user avatars and cards. Images is therefore a polymorphic table which will have associations with both users and cards.
+
+The relationships between users, cards, and images are:
+- <strong>a user had many images, as imageable
+- a card has many images, as imageable</strong>
+
+## ERD
+diagram here
 
 ## Third-party services MTG-marketplace uses
 
