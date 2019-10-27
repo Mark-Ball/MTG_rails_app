@@ -29,6 +29,10 @@ The problem with buying booster packs is that many of the cards are poor quality
 
 This uncertain outcome is essentially gambling, which can lead to addictive buying behaviour.
 
+The primary market for Magic cards is monopolistic as Magic is the intellectual property of Wizards of the Coast and therefore they enjoy the exclusive right to print Magic cards. Under a monopoly, the price of Magic cards is elevated relative to a competitive market, which is beneficial to the monopolist, but detrimental to consumers.
+
+The development of a secondary market for Magic cards introduces economic competition to the market. This has the effect of reducing price, which is beneficial for the players of Magic, but detrimental to Wizards of the Coast. Furthermore, the existence of a secondary market is likely to reduce the demand for booster packs as players have an alternative way to obtain the cards they desire.
+
 MTG-marketplace allows players to buy specific cards, bypassing the regular card-acquisition cycle of buying booster packs, opening the packs to find that the desired card was not included, and then buying more. The advantages are the following:
 - less gambling behaviour
 - ability to construct the deck desired with certainty (i.e. without being exposed to the uncertainty of buying booster packs)
@@ -40,47 +44,47 @@ MTG-marketplace allows players to buy specific cards, bypassing the regular card
 
 User stories and their implications for the features of MTG-marketplace are provided below.
 
-1. As a player, I want to be able to buy individual Magic cards, so I don't have to gamble on booster packs
+<strong>1. As a player, I want to be able to buy individual Magic cards, so I don't have to gamble on booster packs</strong>
 
 Implication: users should be able to view the details of individual cards before purchase, rather than buying without knowing the identity of the card
 
-2. As a player, I want to be able to sell cards I don't use, so that I may recoup some of my costs
-3. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs
+<strong>2. As a player, I want to be able to sell cards I don't use, so that I may recoup some of my costs
+3. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs</strong>
 
 Implication: users should be able to list cards for sale on the website.
 
-4. As a buyer, I want to be able to search all listings, so I may find the individual card I need
+<strong>4. As a buyer, I want to be able to search all listings, so I may find the individual card I need</strong>
 
 Implication: search functionality for listings should exist.
 
-5. As a seller, I want to be able to see the prices that a card is selling at, so that I may set an appropriate price
+<strong>5. As a seller, I want to be able to see the prices that a card is selling at, so that I may set an appropriate price</strong>
 
 Implication: as much detail on transaction prices should be provided as possible. Ideally this would include a price history over several months. However considering the scope of the project, the feature to be implemented is that users can see the prices of all cards currently listed.
 
-6. As a seller, I want to be able to modify my listing after it is posted, so that I may correct any mistaken details I have entered
+<strong>6. As a seller, I want to be able to modify my listing after it is posted, so that I may correct any mistaken details I have entered</strong>
 
 Implication: edit functionality should exist to change details of the listing, or even remove the listing completely.
 
 
-7. As someone speculating on Magic cards without actually playing, I want to be able to see the prices that cards are selling at, so that I may identify an opportunity for profit
+<strong>7. As someone speculating on Magic cards without actually playing, I want to be able to see the prices that cards are selling at, so that I may identify an opportunity for profit</strong>
 
 Implication: all visitors to the website should be able to view the listings without having to register on the site.
 
-8. As both a buyer and a seller, I want the site to handle payment, so I don't have to worry about it
+<strong>8. As both a buyer and a seller, I want the site to handle payment, so I don't have to worry about it</strong>
 
 Implication: a reputable third-party payment gateway such as Stripe should be used on the site. 
 
-9. As a buyer, I want to be able to enter my delivery details once, so that I may save time on multiple transactions
+<strong>9. As a buyer, I want to be able to enter my delivery details once, so that I may save time on multiple transactions</strong>
 
 Implication: a user should have a persistent profile where information is automatically pulled from when necessary.
 
-10. As a seller, I want the website to identify the full card information with as little input from me as possible, so I don't have to manually enter all the details myself
-11. As a buyer, I want the website to check that the details of all cards listed for sale are correct, so I am protected from fraud
+<strong>10. As a seller, I want the website to identify the full card information with as little input from me as possible, so I don't have to manually enter all the details myself
+11. As a buyer, I want the website to check that the details of all cards listed for sale are correct, so I am protected from fraud</strong>
 
 Implication: the website should ask sellers only for the minimum information required to uniquely identify a card, then retrieve the details of each card from a database, rather than asking sellers to enter all the details. This makes the experience easier on sellers as they need to enter less information, and protects buyers because listing details cannot be falsified.
 
-12. As a user, no one should be able to edit my profile or buy or sell under my profile, so I have control over my activity on the site
-13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling
+<strong>12. As a user, no one should be able to edit my profile or buy or sell under my profile, so I have control over my activity on the site
+13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling</strong>
 
 Implication: an authentication system must exist which restricts users from accessing or editing certain information.
 
