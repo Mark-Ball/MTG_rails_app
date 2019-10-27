@@ -159,3 +159,43 @@ It is important to have a database of all Magic cards for this projects so that 
 magicthegathering.io provides endpoints for groups of cards (this is the main endpoint which was used for MTG-marketplace), individual cards, all sets, individual sets, the content of booster packs, a list of card types (e.g. creatures, land, sorcery) and more. The API is rate-limited to 5,000 requests per hour. 
 
 Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers.
+
+## Task planning and tracking
+
+Agile workflow was implemented in the development of MTG-marketplace. This was done despite the fact that the entire project had a duration of two weeks, while a single sprint under Agile methodology would last two weeks. Therefore sprints in the development of MTG-marketplace were planned to last only a few days each. This was characterised by cycles of:
+1. Planning
+2. Development of feature
+3. Testing and code review
+4. Acceptance of code, completion of feature
+
+Features were planned sequentially as later features relied upon earlier feature to function. For example card listings cannot be created until the cards table has been created in the database.
+
+All tasks were tracked with Trello.
+
+#### Feature 1: The database
+The database is the foundation of the entire application, without which only a static website could be created.
+
+Planning the database included:
+- tables and models to be generated
+- attributes on each table
+- associations between tables
+
+Development of the feature included:
+- creating the database
+- generating and running the migrations
+- writing the planned associations into the relevant models
+
+Testing of the feature included running through multiple scenarios where the expected outcome was compared with the actual outcomes. Fixes were implemented if testing revealed errors in the program. Testing of the database involved making sure the following were completed successfully:
+- a user can be created
+- a user can be created with an address correctly associated
+- a card listing can be created
+- a card listing can be created with a user correctly associated
+- a card listing correctly retrieves information from the all_cards table
+- a card can be created with an image correctly associated
+- a user can be created with an image correctly associated
+- cards have colors correctly associated through the join table
+
+When all tests are passed, review of the feature within the overall context of the project is conducted. If no reasons for deviating from the initially planned workflow are given, work on the next feature may begin.
+
+#### Feature 2: 
+
