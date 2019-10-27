@@ -14,6 +14,7 @@ Table users as U {
 Table cards {
   id int [pk]
   name string
+  condition string
   manacost int
   rarity string
   set string
@@ -22,7 +23,10 @@ Table cards {
   power int
   toughness int
   imageUrl varchar
+  price int
+  sold int
   users_id int
+  all_cards_id int
 }
 
 Ref: cards.users_id > U.id
@@ -83,9 +87,14 @@ Table all_cards {
   card_id string
 }
 
-Ref: all_cards.id - cards.id
+Ref: all_cards.id < cards.all_cards_id
 
 Table images {
   id int [pk]
-  
+  imageable_type string
+  imageable_id int
+  url string
 }
+
+Ref: images.imageable_id - users.id
+Ref: images.imageable_id - cards.id

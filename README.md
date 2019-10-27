@@ -65,7 +65,6 @@ Implication: as much detail on transaction prices should be provided as possible
 
 Implication: edit functionality should exist to change details of the listing, or even remove the listing completely.
 
-
 <strong>7. As someone speculating on Magic cards without actually playing, I want to be able to see the prices that cards are selling at, so that I may identify an opportunity for profit</strong>
 
 Implication: all visitors to the website should be able to view the listings without having to register on the site.
@@ -87,7 +86,6 @@ Implication: the website should ask sellers only for the minimum information req
 13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling</strong>
 
 Implication: an authentication system must exist which restricts users from accessing or editing certain information.
-
 
 ## The database structure
 
@@ -137,7 +135,7 @@ The relationships between users, cards, and images are:
 - a card has many images, as imageable</strong>
 
 ## ERD
-diagram here
+![ERD](/docs/ERD.jpg)
 
 ## Third-party services MTG-marketplace uses
 
