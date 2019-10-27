@@ -38,15 +38,52 @@ MTG-marketplace allows players to buy specific cards, bypassing the regular card
 
 ## User stories
 
-1. As a buyer, I want to be able to search all listings, so I may find the individual card I need
-2. As a seller, I want to be able to see the prices that a card is selling at, so that I may price my card most appropriately
-3. As a seller, I want to be able to modify my listing after it is posted, so that I may correct any mistaken details I have entered
-4. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs
-5. As someone speculating on Magic cards without actually playing, I want to be able to see the prices that cards are selling at, so that I may identify an opportunity for profit
-6. As both a buyer and a seller, I want the site to handle payment, so I don't have to worry about it
-7. As a buyer, I want to be able to enter my delivery details once, so that I may save time on multiple transactions
-8. As a seller, I want the website to identify the full card information with as little input from me as possible, so I don't have to manually enter all the details myself
-9. As a buyer, I want the website to check that the details of all cards listed for sale are correct, so I am protected from fraud
+User stories and their implications for the features of MTG-marketplace are provided below.
+
+1. As a player, I want to be able to buy individual Magic cards, so I don't have to gamble on booster packs
+
+Implication: users should be able to view the details of individual cards before purchase, rather than buying without knowing the identity of the card
+
+2. As a player, I want to be able to sell cards I don't use, so that I may recoup some of my costs
+3. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs
+
+Implication: users should be able to list cards for sale on the website.
+
+4. As a buyer, I want to be able to search all listings, so I may find the individual card I need
+
+Implication: search functionality for listings should exist.
+
+5. As a seller, I want to be able to see the prices that a card is selling at, so that I may set an appropriate price
+
+Implication: as much detail on transaction prices should be provided as possible. Ideally this would include a price history over several months. However considering the scope of the project, the feature to be implemented is that users can see the prices of all cards currently listed.
+
+6. As a seller, I want to be able to modify my listing after it is posted, so that I may correct any mistaken details I have entered
+
+Implication: edit functionality should exist to change details of the listing, or even remove the listing completely.
+
+
+7. As someone speculating on Magic cards without actually playing, I want to be able to see the prices that cards are selling at, so that I may identify an opportunity for profit
+
+Implication: all visitors to the website should be able to view the listings without having to register on the site.
+
+8. As both a buyer and a seller, I want the site to handle payment, so I don't have to worry about it
+
+Implication: a reputable third-party payment gateway such as Stripe should be used on the site. 
+
+9. As a buyer, I want to be able to enter my delivery details once, so that I may save time on multiple transactions
+
+Implication: a user should have a persistent profile where information is automatically pulled from when necessary.
+
+10. As a seller, I want the website to identify the full card information with as little input from me as possible, so I don't have to manually enter all the details myself
+11. As a buyer, I want the website to check that the details of all cards listed for sale are correct, so I am protected from fraud
+
+Implication: the website should ask sellers only for the minimum information required to uniquely identify a card, then retrieve the details of each card from a database, rather than asking sellers to enter all the details. This makes the experience easier on sellers as they need to enter less information, and protects buyers because listing details cannot be falsified.
+
+12. As a user, no one should be able to edit my profile or buy or sell under my profile, so I have control over my activity on the site
+13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling
+
+Implication: an authentication system must exist which restricts users from accessing or editing certain information.
+
 
 ## The database structure
 
@@ -92,7 +129,7 @@ The relationship between all_cards and cards is:
 The last table in the database structure is images, which is used to store images of both user avatars and cards. Images is therefore a polymorphic table which will have associations with both users and cards.
 
 The relationships between users, cards, and images are:
-- <strong>a user had many images, as imageable
+- <strong>a user has many images, as imageable
 - a card has many images, as imageable</strong>
 
 ## ERD
