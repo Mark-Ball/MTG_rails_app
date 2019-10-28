@@ -176,7 +176,6 @@ The relationships between users, cards, and images are:
 - a card has many images, as imageable</strong>
 
 ## ERD
-![ERD](/docs/ERD.jpg)
 
 ## Third-party services MTG-marketplace uses
 
