@@ -48,8 +48,9 @@ User stories and their implications for the features of MTG-marketplace are prov
 
 Implication: users should be able to view the details of individual cards before purchase, rather than buying without knowing the identity of the card
 
-<strong>2. As a player, I want to be able to sell cards I don't use, so that I may recoup some of my costs
-3. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs</strong>
+<strong>2. As a player, I want to be able to sell cards I don't use, so that I may recoup some of my costs</strong>
+
+<strong>3. As someone who no longer plays Magic, I want to be able to sell my old cards, so I may recoup some of my costs</strong>
 
 Implication: users should be able to list cards for sale on the website.
 
@@ -77,13 +78,15 @@ Implication: a reputable third-party payment gateway such as Stripe should be us
 
 Implication: a user should have a persistent profile where information is automatically pulled from when necessary.
 
-<strong>10. As a seller, I want the website to identify the full card information with as little input from me as possible, so I don't have to manually enter all the details myself
-11. As a buyer, I want the website to check that the details of all cards listed for sale are correct, so I am protected from fraud</strong>
+<strong>10. As a seller, I want the website to identify the full card information with as little input from me as possible, so I don't have to manually enter all the details myself</strong>
+
+<strong>11. As a buyer, I want the website to check that the details of all cards listed for sale are correct, so I am protected from fraud</strong>
 
 Implication: the website should ask sellers only for the minimum information required to uniquely identify a card, then retrieve the details of each card from a database, rather than asking sellers to enter all the details. This makes the experience easier on sellers as they need to enter less information, and protects buyers because listing details cannot be falsified.
 
 <strong>12. As a user, no one should be able to edit my profile or buy or sell under my profile, so I have control over my activity on the site
-13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling</strong>
+
+<strong>13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling</strong>
 
 Implication: an authentication system must exist which restricts users from accessing or editing certain information.
 
@@ -149,31 +152,41 @@ The relationship between users and addresses is:
 - <strong>a user has one address
 - an address belongs to a user</strong>
 
-The cards table holds the details of all cards listed on the website.
+The listings table holds the details of all cards listed on the website.
 
-The relationship between users and cards is:
-- <strong>a user has many cards
-- a card belongs to a user</strong>
+The relationship between users and listings is:
+- <strong>a user has many listings
+- a listing belongs to a user</strong>
 
-The colours table holds a list of the five colors used in Magic, as well as colorless. This table is used to provide information about the color of individual cards rather than add six additional attributes to each card. Colors is connected to cards by the join table cards_colors.
+The colors table holds a list of the five colors used in Magic, as well as colorless. This table is used to provide information about the color of individual cards rather than add six additional attributes to each card. Colors is connected to cards by the join table cards_color.
 
-The relationship between cards and colors are:
-- <strong>a card has many cards_colors
-- a card has many colors, through cards_colors
-- a color has many cards_colors
-- a color has many cards, through cards_colors</strong>
+The relationships between cards and colors are:
+- <strong>a card has many cards_color
+- a card has many colors, through cards_color
+- a color has many cards_color
+- a color has many cards, through cards_color</strong>
 
-The all_cards table exists to hold all the information for all Magic cards in existance. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the entire set of Magic cards has been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are not relying on a third party.
+The cards table exists to hold all the information for all Magic cards in existence. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the entire set of Magic cards has been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are are hosting the database ourselves.
 
-The relationship between all_cards and cards is:
-- <strong>cards belongs to all_cards
-- all_cards has many cards</strong>
+The relationship between cards and listings is:
+- <strong>listings belongs to cards
+- cards has many listings</strong>
 
-The last table in the database structure is images, which is used to store images of both user avatars and cards. Images is therefore a polymorphic table which will have associations with both users and cards.
+The transactions table exists to hold information about which cards have been sold. This table is linked to both the listings and users tables and will also contain the purchase id created by Stripe.
+
+The relationship between transactions and users is:
+- <strong>a user has many transactions
+- a transaction belongs to a user</strong>
+
+The relationship between transactions and listings is:
+- <strong>a listing has one transaction
+- a transaction belongs to a listing</strong>
+
+The last tables in the database structure are the active_storage_blobs and active_storage_attachments. The purpose of these tables is to store images which may be associated with either users or listings, meaning that the relationship is polymorphic. .
 
 The relationships between users, cards, and images are:
-- <strong>a user has many images, as imageable
-- a card has many images, as imageable</strong>
+- <strong>a user has one image attached
+- a card has one image attached</strong>
 
 ## ERD
 ![ERD](/docs/ERD.jpg)
