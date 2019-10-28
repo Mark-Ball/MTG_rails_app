@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_022042) do
+ActiveRecord::Schema.define(version: 2019_10_28_040932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,37 @@ ActiveRecord::Schema.define(version: 2019_10_28_022042) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "cards", force: :cascade do |t|
+    t.string "name"
+    t.string "names", array: true
+    t.string "manacost"
+    t.integer "cmc"
+    t.string "colors", array: true
+    t.string "colorIdentity", array: true
+    t.string "card_type"
+    t.string "supertypes", array: true
+    t.string "types", array: true
+    t.string "subtypes", array: true
+    t.string "rarity"
+    t.string "set"
+    t.text "text"
+    t.string "artist"
+    t.string "number"
+    t.integer "power"
+    t.integer "toughness"
+    t.string "layout"
+    t.integer "multiverseid"
+    t.string "imageUrl"
+    t.text "rulings", array: true
+    t.text "foreignNames", array: true
+    t.string "printings"
+    t.text "originalText"
+    t.string "originalType"
+    t.string "magic_card_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

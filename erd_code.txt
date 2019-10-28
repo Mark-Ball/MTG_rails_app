@@ -8,6 +8,10 @@ Table users as U {
   alias string
   email string
   encrypted_password string
+  reset_password_token string
+  reset_password_sent_at date
+  remember_created_at date
+  created_at date
 }
 
 Table listings {
@@ -25,18 +29,17 @@ Table colors {
   color string
  }
  
-Table cards_colors {
+Table colors_listing {
   card_id int
   color_id int
  }
  
-Ref: cards_colors.color_id > colors.id
-Ref: cards_colors.card_id > listings.id
+Ref: colors_listing.color_id > colors.id
+Ref: colors_listing.card_id > listings.id
 
 Table addresses {
   id int [pk]
-  street_number int
-  street string
+  address string
   suburb string
   city string
   country string
@@ -50,7 +53,7 @@ Table cards {
   id int [pk]
   name string
   names array
-  manacost int
+  manacost string
   cmc int
   colors array
   colorIdentity array
@@ -67,7 +70,7 @@ Table cards {
   toughness int
   layout string
   multiverseid int
-  imageUrl varchar
+  imageUrl string
   rulings array
   foreignNames array
   printings string

@@ -1,0 +1,57 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  names: 
+  manacost: 
+  cmc: 
+  colors: 
+  colorIdentity: 
+  card_type: MyString
+  supertypes: 
+  types: 
+  subtypes: 
+  rarity: MyString
+  set: MyString
+  text: MyText
+  artist: MyString
+  number: MyString
+  power: 
+  toughness: 
+  layout: MyString
+  multiverseid: 
+  imageUrl: MyString
+  rulings: 
+  foreignNames: 
+  printings: MyString
+  originalText: MyText
+  originalType: MyString
+  magic_card_id: MyString
+
+two:
+  name: MyString
+  names: 
+  manacost: 
+  cmc: 
+  colors: 
+  colorIdentity: 
+  card_type: MyString
+  supertypes: 
+  types: 
+  subtypes: 
+  rarity: MyString
+  set: MyString
+  text: MyText
+  artist: MyString
+  number: MyString
+  power: 
+  toughness: 
+  layout: MyString
+  multiverseid: 
+  imageUrl: MyString
+  rulings: 
+  foreignNames: 
+  printings: MyString
+  originalText: MyText
+  originalType: MyString
+  magic_card_id: MyString
