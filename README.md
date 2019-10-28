@@ -203,7 +203,7 @@ Having a pre-existing database of all Magic cards which is used to provide infor
 
 ## Task planning and tracking
 
-Agile workflow was implemented in the development of MTG-marketplace. This was done despite the fact that the entire project had a duration of two weeks, while a single sprint under Agile methodology would last two weeks. Therefore sprints in the development of MTG-marketplace were planned to last only a few days each. This was characterised by cycles of:
+The process of developing MTG-marketplace was characterised by cycles of:
 1. Planning
 2. Development of feature
 3. Testing and code review
@@ -240,3 +240,8 @@ When all tests are passed, review of the feature within the overall context of t
 
 #### Feature 2: 
 
+#### Trello
+Screenshots of the Trello board used to track progress through the project are provided below.
+
+![trello_1](docs/trello_1.jpg)
+<strong>Figure 1. Trello board at beginning of Day 1</strong>
