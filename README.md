@@ -84,7 +84,7 @@ Implication: a user should have a persistent profile where information is automa
 
 Implication: the website should ask sellers only for the minimum information required to uniquely identify a card, then retrieve the details of each card from a database, rather than asking sellers to enter all the details. This makes the experience easier on sellers as they need to enter less information, and protects buyers because listing details cannot be falsified.
 
-<strong>12. As a user, no one should be able to edit my profile or buy or sell under my profile, so I have control over my activity on the site
+<strong>12. As a user, no one should be able to edit my profile or buy or sell under my profile, so I have control over my activity on the site</strong>
 
 <strong>13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling</strong>
 
