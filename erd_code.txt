@@ -3,33 +3,22 @@
 
 // Creating tables
 Table users as U {
-  id int [pk, increment] // auto-increment
-  first_name string
-  last_name string
+  id int [pk, increment]
+  name string
   alias string
   email string
   encrypted_password string
 }
 
-Table cards {
+Table listings {
   id int [pk]
-  name string
   condition string
-  manacost int
-  rarity string
-  set string
-  text text
-  artist string
-  power int
-  toughness int
-  imageUrl varchar
   price int
-  sold int
-  users_id int
-  all_cards_id int
+  user_id int
+  card_id int
 }
 
-Ref: cards.users_id > U.id
+Ref: listings.user_id > U.id
 
 Table colors {
   id int [pk]
@@ -37,12 +26,12 @@ Table colors {
  }
  
 Table cards_colors {
-  cards_id int
-  colors_id int
+  card_id int
+  color_id int
  }
  
-Ref: cards_colors.colors_id > colors.id
-Ref: cards_colors.cards_id > cards.id
+Ref: cards_colors.color_id > colors.id
+Ref: cards_colors.card_id > listings.id
 
 Table addresses {
   id int [pk]
@@ -52,12 +41,12 @@ Table addresses {
   city string
   country string
   postcode int
-  users_id int
+  user_id int
 }
 
-Ref: addresses.users_id - users.id
+Ref: addresses.user_id - users.id
 
-Table all_cards {
+Table cards {
   id int [pk]
   name string
   names array
@@ -87,14 +76,39 @@ Table all_cards {
   card_id string
 }
 
-Ref: all_cards.id < cards.all_cards_id
+Ref: cards.id < listings.card_id
 
-Table images {
+Table transactions {
   id int [pk]
-  imageable_type string
-  imageable_id int
-  url string
+  user_id int
+  listing_id int
+  purchase_id string
+  transaction_date date
 }
 
-Ref: images.imageable_id - users.id
-Ref: images.imageable_id - cards.id
+Ref: transactions.user_id > users.id
+Ref: transactions.listing_id - listings.id
+
+Table active_storage_blobs {
+  id int [pk]
+  key string
+  filename string
+  content_type string
+  metadata hash
+  byte_size int
+  checksum string
+  created_at date
+}
+
+Table active_storage_attachments {
+  id int [pk]
+  name string
+  record_type string
+  record_id int
+  blob_id int
+  created_at date
+}
+
+Ref: active_storage_attachments.record_id - listings.id
+Ref: active_storage_attachments.blob_id - active_storage_blobs.id
+Ref: active_storage_attachments.record_id - users.id
