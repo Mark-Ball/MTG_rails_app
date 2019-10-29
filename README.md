@@ -137,8 +137,6 @@ MTG-marketplace uses the PostgreSQL database for the persistent storage of data.
 - users
 - addresses
 - listings
-- colors
-- colors_listing
 - cards
 - transactions
 - active_storage_blobs
@@ -164,7 +162,7 @@ The relationship between users and listings is:
 The cards table exists to hold all the information for all Magic cards in existence. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the entire set of Magic cards has been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are are hosting the database ourselves.
 
 The relationship between cards and listings is:
-- <strong>a listing belongs a card
+- <strong>a listing belongs to a card
 - a card has many listings</strong>
 
 The transactions table exists to hold information about which cards have been sold. This table holds foreign keys for both the listings and users tables and will also contain the purchase id created by Stripe.

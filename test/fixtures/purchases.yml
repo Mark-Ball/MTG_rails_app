@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  listing: one
+  purchase_id: MyString
+  purchase_date: 2019-10-29
+
+two:
+  user: two
+  listing: two
+  purchase_id: MyString
+  purchase_date: 2019-10-29

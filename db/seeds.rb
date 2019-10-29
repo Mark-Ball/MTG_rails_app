@@ -50,3 +50,8 @@
 #     puts "finished page #{i}"
 #     i += 1
 # end
+
+#downloading images
+img = Down.download("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130483&type=card")
+card = Card.find(102)
+card.image.attach(io: img, filename: "#{card.name}_#{card.set}.jpg")
