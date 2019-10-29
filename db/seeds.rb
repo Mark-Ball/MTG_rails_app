@@ -6,35 +6,47 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-response = HTTParty.get("https://api.magicthegathering.io/v1/cards?name=Ascendant Evincar&setName=Nemesis")
+# card = JSON.parse(response.body)["cards"][0]
 
-card = JSON.parse(response.body)["cards"][0]
+# i = 1
+# while true
+#     response = HTTParty.get("https://api.magicthegathering.io/v1/cards?page=#{i}")
 
-Card.create(
-    name: card["name"],
-    names: card["names"],
-    manacost: card["manaCost"],
-    cmc: card["cmc"],
-    colors: card["colors"],
-    colorIdentity: card["colorIdentity"],
-    card_type: card["type"],
-    supertypes: card["supertypes"],
-    types: card["types"],
-    subtypes: card["subtypes"],
-    rarity: card["rarity"],
-    set: card["setName"],
-    text: card["text"],
-    artist: card["artist"],
-    number: card["number"],
-    power: card["power"],
-    toughness: card["toughness"],
-    layout: card["layout"],
-    multiverseid: card["multiverseid"],
-    imageUrl: card["imageUrl"],
-    rulings: card["rulings"],
-    foreignNames: card["foreignNames"],
-    printings: card["printings"],
-    originalText: card["originalText"],
-    originalType: card["originalType"],
-    magic_card_id: card["id"]
-)
+#     cards = JSON.parse(response.body)["cards"]
+#     break if cards.length == 0
+
+#     puts "retrieving page #{i}"
+
+#     for card in cards
+#         Card.create(
+#             name: card["name"],
+#             names: card["names"],
+#             manacost: card["manaCost"],
+#             cmc: card["cmc"],
+#             colors: card["colors"],
+#             colorIdentity: card["colorIdentity"],
+#             card_type: card["type"],
+#             supertypes: card["supertypes"],
+#             types: card["types"],
+#             subtypes: card["subtypes"],
+#             rarity: card["rarity"],
+#             set: card["setName"],
+#             text: card["text"],
+#             artist: card["artist"],
+#             number: card["number"],
+#             power: card["power"],
+#             toughness: card["toughness"],
+#             layout: card["layout"],
+#             multiverseid: card["multiverseid"],
+#             imageUrl: card["imageUrl"],
+#             rulings: card["rulings"],
+#             foreignNames: card["foreignNames"],
+#             printings: card["printings"],
+#             originalText: card["originalText"],
+#             originalType: card["originalType"],
+#             magic_card_id: card["id"]
+#         )
+#     end
+#     puts "finished page #{i}"
+#     i += 1
+# end

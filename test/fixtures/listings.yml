@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  condition: MyString
+  price: 1
+  user: one
+  card: one
+
+two:
+  condition: MyString
+  price: 1
+  user: two
+  card: two
