@@ -151,38 +151,39 @@ The users table exists to store information regarding individual buyers and sell
 The addresses table exists to store the postage address of each user so that sellers know where to send any purchased cards. Addresses are associated with users using a foreign key.
 
 The relationship between users and addresses is:
-- <strong>a user has one address
-- an address belongs to a user</strong>
+
+- <strong>an address belongs to a user
+- a user has one address</strong>
 
 The listings table holds the details of all cards listed on the website. The table contains foreign keys for both the users and cards tables.
 
 The relationship between users and listings is:
-- <strong>a user has many listings
-- a listing belongs to a user</strong>
+- <strong>a listing belongs to a user
+- a user has many listings</strong>
 
 The colors table holds a list of the five colors used in Magic, as well as colorless. This table is used to provide information about the color of individual listings rather than add six additional attributes to each listing. Colors is connected to listings by the join table colors_listing.
 
 The relationships between colors and listings are:
-- <strong>a listing has many colors_listing
-- a listing has many colors, through colors_listing
-- a color has many colors_listing
-- a color has many cards, through colors_listing</strong>
+- <strong>a listing has many colors_listings
+- a listing has many colors, through colors_listings
+- a color has many colors_listings
+- a color has many cards, through colors_listings</strong>
 
 The cards table exists to hold all the information for all Magic cards in existence. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the entire set of Magic cards has been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are are hosting the database ourselves.
 
 The relationship between cards and listings is:
-- <strong>a listing belongs to cards
+- <strong>a listing belongs a card
 - a card has many listings</strong>
 
 The transactions table exists to hold information about which cards have been sold. This table holds foreign keys for both the listings and users tables and will also contain the purchase id created by Stripe.
 
 The relationship between transactions and users is:
-- <strong>a user has many transactions
-- a transaction belongs to a user</strong>
+- <strong>a transaction belongs to a user
+- a user has many transactions</strong>
 
 The relationship between transactions and listings is:
-- <strong>a listing has one transaction
-- a transaction belongs to a listing</strong>
+- <strong>a transaction belongs to a listing
+- a listing has one transaction</strong>
 
 The last tables in the database structure are the active_storage_blobs and active_storage_attachments. The purpose of these tables is to store images which may be associated with either users or listings, meaning that the relationship is polymorphic. Active_storage_blobs contains the information on the image, such as its name and size in bytes. Active_storage_attachments contains the information that links these images to other tables. It does this by including a record attribute, which contains the name of the table the image is associated with. In our app, this will be either users or listings. Secondly it contains a record_id attribute which specifies which record the image is associated with. Record and record_id together identify the table and id which the image is associated with.
 
