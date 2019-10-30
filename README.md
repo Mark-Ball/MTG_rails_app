@@ -186,14 +186,11 @@ The relationships between users, cards, and images are:
 
 ## Third-party services MTG-marketplace uses
 
-MTG-marketplace uses three third-party services:
+MTG-marketplace used four third-party services:
 - magicthegathering.io
+- Down gem
 - Stripe
-- Devise
-
-#### Stripe
-
-Stripe is the payment system used in MTG-marketplace. 
+- Devise gem
 
 #### magicthegathering.io
 
@@ -205,7 +202,31 @@ It is important to have a database of all Magic cards for this projects so that 
 
 magicthegathering.io provides endpoints for groups of cards (this is the main endpoint which was used for MTG-marketplace), individual cards, all sets, individual sets, the content of booster packs, a list of card types (e.g. creatures, land, sorcery) and more. The API is rate-limited to 5,000 requests per hour. 
 
-Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers.
+Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers. In total approximately 47,000 records were downloaded.
+
+#### Down
+
+Github: https://github.com/janko/down
+
+Down is a Ruby gem used for downloading files. In MTG-marketplace, Down was used to download images of Magic cards. The url for each download was sourced from the cards downloaded from magicthegathering.io and a script was written in Ruby which downloaded the image from each url, then associated the image with the correct card via the ORM and saved the image in the database.
+
+The result was that active_storage_blobs stored each image and active_storage_attachments saved the association between that image and the correct card.
+
+The only use of Down was to seed the database, although in future Down will be used when new sets are released to download the images for those new records. 
+
+#### Stripe
+
+Stripe is the payment system used in MTG-marketplace.
+
+## Tech stack
+
+The following were used in the creation of MTG-marketplace:
+- Ruby
+    - Gems: Down, Devise, Stripe
+- Rails
+- HTML
+- CSS
+- Heroku
 
 ## Task planning and tracking
 
@@ -244,10 +265,23 @@ Testing of the feature included running through multiple scenarios where the exp
 
 When all tests are passed, review of the feature within the overall context of the project is conducted. If no reasons for deviating from the initially planned workflow are given, work on the next feature may begin.
 
-#### Feature 2: 
+#### Feature 2: seeding the database with all cards and their images
+
+One of the major design decisions for MTG-marketplace was to take the onus of inputting information regarding their cards away from the user. Instead, a database of all Magic cards and their images was maintained. When a user intends to list a card for sale, they do not need to input all the information regarding the card, nor upload an image of the card. Rather they only need to input the minimum information required to uniquely identify a card: the name of the card and the set. Using this information, the application searches the database for the matching record and returns the image of the card. The user can then confirm that this is the card they wish to list and input the other information which is specific to their listing: the condition of the card and the price they wish to sell at.
+
+Planning:
+- investigating the gems that could make development easier
+
+Development:
+
+Testing:
+- a test controller was created (because no controllers had been created at this stage of development) 
 
 #### Trello
 Screenshots of the Trello board used to track progress through the project are provided below.
 
 ![trello_1](docs/trello_1.jpg)
 <strong>Figure 1. Trello board at beginning of Day 1</strong>
+
+![trello_2](docs/trello_2.jpg)
+<strong>Figure 2. Trello board at end of Day 2</strong>

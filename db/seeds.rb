@@ -52,6 +52,20 @@
 # end
 
 #downloading images
-img = Down.download("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=130483&type=card")
-card = Card.find(102)
-card.image.attach(io: img, filename: "#{card.name}_#{card.set}.jpg")
+# i = 103
+# while i < 508 #this range represents all Tenth Edition cards
+#     card = Card.find(i)
+#     if card.imageUrl
+#         img = Down.download(card.imageUrl)
+#         card.image.attach(io: img, filename: "#{card.name}_#{card.set}.jpg")
+#         puts "Card #{i} downloaded"
+#     end
+#     i += 1
+# end
+
+#seed the listings
+card_ids = [131, 182, 158, 390, 434, 454]
+for id in card_ids
+    price = rand(100..500)
+    User.first.listings.create(condition: "mint", price: price, card_id: id)
+end

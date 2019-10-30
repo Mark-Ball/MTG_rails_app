@@ -1,0 +1,15 @@
+<h3>image</h3>
+
+Login/logout
+
+<h3>Filters</h3>
+
+<% @listings.each_with_index { |listing, index| %>
+    <% img = @cards.find(listing.card_id).image %>
+    <%= link_to listing_path(@listings[index].id), :action => 'go' do %>
+        <div>
+            <%= image_tag img if img.attached? %>
+            <%= number_to_currency(listing.price / 100.0) %>
+        </div>
+    <% end %>
+<% } %>
