@@ -17,6 +17,11 @@ class ListingsController < ApplicationController
     end
 
     def new
-        
+        @card = Card.where(name: params[:name]).where(set: params[:set])[0]
+        # where(name: params[:name]).where(set: params[:set])
+        # find_by_id(params[:id])
+    end
+
+    def create
     end
 end

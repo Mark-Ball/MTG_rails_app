@@ -1,0 +1,22 @@
+<%= render "top_bar" %>
+
+<h1>Enter the details for the card you wish to list</h1>
+
+<%= form_with(url: new_listing_path, method: "get", local: true) do %>
+<div>
+    <%= label_tag(:name, "Name:") %>
+    <%= text_field_tag(:name) %>
+</div>
+<div>
+    <%= label_tag(:set, "Set:") %>
+    <%= text_field_tag(:set) %>
+</div>
+<div>
+    <%= label_tag(:id, "ID:") %>
+    <%= text_field_tag(:id) %>
+</div>
+    <%= submit_tag("Search") %>
+<% end %>
+
+<%= @card.image %>
+<%= params %>
