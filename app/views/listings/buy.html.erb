@@ -2,5 +2,8 @@
 
 <h1>You are about to purchase the following card</h1>
 
+<%= image_tag @cards.find(@listing.card_id).image %>
 
+<%= number_to_currency(@listing.price / 100.0) %>
 
+Confirm button

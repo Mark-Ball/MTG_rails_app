@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   get "/listings", to: "listings#index", as: "listings"
   get "/listings/:id/buy", to: "listings#buy", as: "buy_listing"
   get "/listings/:id", to: "listings#show", as: "listing"
+  get "/listings/new", to: "listings#new", as: "new_listing"
   get "/testshow", to: "test#show"
 end
