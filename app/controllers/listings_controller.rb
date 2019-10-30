@@ -10,4 +10,9 @@ class ListingsController < ApplicationController
         @listing = Listing.find(params[:id])
         @cards = Card.all
     end
+
+    def buy
+        @listing = Listing.find(params[:id])
+        @cards = Card.all
+    end
 end

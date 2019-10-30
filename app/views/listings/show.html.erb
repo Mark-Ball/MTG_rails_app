@@ -1,6 +1,4 @@
-<%= link_to("Home", root_path) %>
-<%= link_to("Browse", listings_path) %>
-login
+<%= render "top_bar" %>
 
 <% listing = @cards.find(@listing.card_id) %>
 
@@ -9,13 +7,8 @@ login
 <% img = listing.image %>
 <%= image_tag img if img.attached? %>
 
-go through all listings with that card id, show seller, condition, price
 <% for listing in @listings.where(card_id: @listing.card_id) %>
     <ul>
         <li><%= "Seller: #{@users.find(listing.user_id).email}, Condition: #{listing.condition}, Price: #{number_to_currency(listing.price / 100.0)}" %></li>
     </ul>
 <% end %>
-
-
-seller-condition-price table
-
