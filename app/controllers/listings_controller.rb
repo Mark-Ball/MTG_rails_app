@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
     def index
+        @listing
         @listings = Listing.all.uniq { |listing| listing.card_id }
         @cards = Card.all
     end
@@ -18,10 +19,12 @@ class ListingsController < ApplicationController
 
     def new
         @card = Card.new
-        @cards = Card.where(name: params[:card][:name]).where(set: params[:card][:set])
-        byebug
-        # where(name: params[:name]).where(set: params[:set])
-        # find_by_id(params[:id])
+
+        if params[:card][:set].empty? 
+            @cards = Card.where(name: params[:card][:name])
+        else
+            @cards = Card.where(name: params[:card][:name]).where(set: params[:card][:set])
+        end
     end
 
     def create
