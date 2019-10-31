@@ -3,6 +3,12 @@ class ListingsController < ApplicationController
         @listing
         @listings = Listing.all.uniq { |listing| listing.card_id }
         @cards = Card.all
+
+        @card_types = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Sorcery']
+        @rarities = Card.distinct.pluck(:rarity).sort
+        # [['Mythic', 1], ['Rare', 2], ['Uncommon', 3], ['Common', 4]]
+        @conditions = ['Any', 'Mint', 'Near mint', 'Excellent', 'Good', 'Lightly played', 'Played', 'Poor']
+        @sets = Card.distinct.pluck(:set).sort
     end
 
     def show
