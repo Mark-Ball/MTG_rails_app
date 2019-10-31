@@ -1,0 +1,19 @@
+<%= render "partials/top_bar" %>
+
+<h1>Your profile</h1>
+
+<div>
+    Name: <%= @user.email %>
+</div>
+<div>
+    Alias: <%= @user.email %>
+</div>
+<div>
+    Address: <%= @address.address %>
+    <%= @address.suburb %>
+    <%= @address.country %>
+    <%= @address.postcode %>
+</div>
+<div>
+    Email: <%= @user.email %>
+</div>
