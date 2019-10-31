@@ -14,10 +14,12 @@
         <%= submit_tag("Search") %>
 <% end %>
 
-<% if @cards.empty? %>
-    <p><%= "There were no cards that matched your search" %></p>
-<% else %>
-    <% for card in @cards %>
-        <%= image_tag card.image if card.image.attached? %>
+<% if @cards != nil %>
+    <% if @cards.empty? %>
+        <p><%= "There were no cards that matched your search" %></p>
+    <% else %>
+        <% for card in @cards %>
+            <%= image_tag card.image if card.image.attached? %>
+        <% end %>
     <% end %>
 <% end %>

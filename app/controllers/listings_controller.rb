@@ -20,10 +20,14 @@ class ListingsController < ApplicationController
     def new
         @card = Card.new
 
-        if params[:card][:set].empty? 
-            @cards = Card.where(name: params[:card][:name])
+        if params[:card].nil?
+            @cards = nil
         else
-            @cards = Card.where(name: params[:card][:name]).where(set: params[:card][:set])
+            if params[:card][:set].empty? 
+                @cards = Card.where(name: params[:card][:name])
+            else
+                @cards = Card.where(name: params[:card][:name]).where(set: params[:card][:set])
+            end
         end
     end
 
