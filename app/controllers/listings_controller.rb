@@ -23,7 +23,7 @@ class ListingsController < ApplicationController
         @cards = Card.all
     end
 
-    def new
+    def new #called by when getting new.html.erb 'Search' button on /listings/new page
         @card = Card.new
 
         if params[:card].nil?
@@ -37,10 +37,15 @@ class ListingsController < ApplicationController
         end
     end
 
-    def confirm
+    def confirm #called when getting confirm.html.erb, i.e. with 'Yes' button on /listings/new/
         @card = Card.find(params[:card][:id])
     end
 
-    def create
+    def create #called with 'Create listing' button on /listings/new page
+        @listing = Listing.new(
+            card_id: params[:listing][:card_id],
+            condition: params[:listing][:condition],
+            price: params[:listing][:price]
+        )
     end
 end

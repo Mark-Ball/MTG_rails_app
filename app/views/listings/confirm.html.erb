@@ -1,3 +1,5 @@
+<%= render "top_bar" %>
+
 <h1>You are about to list the following card</h1>
 
 <%= image_tag @card.image %>
@@ -12,8 +14,6 @@
         <label for="price">Price</label>
         <input type="float" name="listing[price]" id="price" />
     </div>
-    <input type="hidden" name="listing[card_id]" />
+    <input type="hidden" name="listing[card_id]" value=<%= @card.id %> />
     <input type="submit" value="Create listing" />
 </form>
-
-<%= params %>
