@@ -37,6 +37,10 @@ class ListingsController < ApplicationController
         end
     end
 
+    def confirm
+        @card = Card.find(params[:card][:id])
+    end
+
     def create
     end
 end

@@ -19,7 +19,21 @@
         <p><%= "There were no cards that matched your search" %></p>
     <% else %>
         <% for card in @cards %>
-            <%= image_tag card.image if card.image.attached? %>
+            <%= link_to confirm_new_listing_path, :action => 'go' do %>
+                <div>
+                    <%= image_tag card.image if card.image.attached? %>
+                    <%= card.id %>
+                </div>
+            <% end %>
         <% end %>
     <% end %>
+<% end %>
+
+<% if @cards != nil %>
+    <h3>Is this the card you want to list?</h3>
+    <form method="GET" action="<%= confirm_new_listing_path %>">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+        <input type="hidden" name="card[id]" value="<%= @cards[0].id %>" />
+        <input class="button" type="submit" value="Yes" />
+    </form>
 <% end %>

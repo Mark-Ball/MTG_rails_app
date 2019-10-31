@@ -1,0 +1,19 @@
+<h1>You are about to list the following card</h1>
+
+<%= image_tag @card.image %>
+
+<form method="POST" action="<%= listings_path %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <div>
+        <label for="condition">Condition</label>
+        <input type="text" name="listing[condition]" id="condition" />
+    </div>
+    <div>
+        <label for="price">Price</label>
+        <input type="float" name="listing[price]" id="price" />
+    </div>
+    <input type="hidden" name="listing[card_id]" />
+    <input type="submit" value="Create listing" />
+</form>
+
+<%= params %>
