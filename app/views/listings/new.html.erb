@@ -2,21 +2,26 @@
 
 <h1>Enter the details for the card you wish to list</h1>
 
-<%= form_with(url: new_listing_path, method: "get", local: true) do %>
+<%= form_with(model: @card, url: new_listing_path, method: "get", local: true) do |form| %>
 <div>
-    <%= label_tag(:name, "Name:") %>
-    <%= text_field_tag(:name) %>
+    <%= form.label(:name) %>
+    <%= form.text_field(:name) %>
 </div>
 <div>
-    <%= label_tag(:set, "Set:") %>
-    <%= text_field_tag(:set) %>
+    <%= form.label(:set) %>
+    <%= form.text_field(:set) %>
 </div>
 <div>
-    <%= label_tag(:id, "ID:") %>
-    <%= text_field_tag(:id) %>
+    <%= form.label(:id) %>
+    <%= form.text_field(:id) %>
 </div>
     <%= submit_tag("Search") %>
 <% end %>
 
-<%= @card.image %>
-<%= params %>
+<% if @cards.nil? %>
+    <% "There were no cards that matched your search" %>
+<% else %>
+    <% for card in @cards %>
+        <%= image_tag card.image %>
+    <% end %>
+<% end %>
