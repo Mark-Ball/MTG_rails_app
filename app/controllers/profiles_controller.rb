@@ -7,5 +7,16 @@ class ProfilesController < ApplicationController
     end
 
     def edit
+        @user = current_user
+    end
+
+    def update
+        current_user.update(
+            name: params[:profile][:name],
+            alias: params[:profile][:alias],
+            email: params[:profile][:email]
+        )
+
+        byebug
     end
 end

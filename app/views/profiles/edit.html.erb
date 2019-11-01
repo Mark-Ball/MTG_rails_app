@@ -2,8 +2,9 @@
 
 <h1>Edit your profile</h1>
 
-<form method="POST" action="<%= edit_profile_path %>">
+<form method="POST" action="<%= profile_path %>">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <input type=hidden name="_method" value="put" />
     <div>
         <label for="name">Name</label>
         <input type="text_field" name="profile[name]" id="name" />
