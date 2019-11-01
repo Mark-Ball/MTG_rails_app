@@ -13,9 +13,9 @@ class ListingsController < ApplicationController
 
     def show
         @users = User.all
-        @listings = Listing.all
         @listing = Listing.find(params[:id])
-        @cards = Card.all
+        @listings = Listing.where(card_id: @listing.card_id)
+        @card = Card.find(@listing.card_id)
     end
 
     def buy

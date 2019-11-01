@@ -285,3 +285,6 @@ Screenshots of the Trello board used to track progress through the project are p
 
 ![trello_2](docs/trello_2.jpg)
 <strong>Figure 2. Trello board at end of Day 2</strong>
+
+![trello_3](docs/trello_3.jpg)
+<strong>Figure 3. Trello board at end of Day 5</strong>

@@ -1,17 +1,28 @@
 <%= render "partials/top_bar" %>
 
-<% listing = @cards.find(@listing.card_id) %>
+<h1><%= @card.name %></h1>
 
-<h1><%= listing.name %></h1>
+<%= image_tag @card.image if @card.image.attached? %>
 
-<% img = listing.image %>
-<%= image_tag img if img.attached? %>
-
-<% for listing in @listings.where(card_id: @listing.card_id) %>
+<% for listing in @listings %>
     <ul>
         <li><%= "Seller: #{@users.find(listing.user_id).email}, Condition: #{listing.condition}, Price: #{number_to_currency(listing.price / 100.0)}" %></li>
     </ul>
 <% end %>
+
+<table>
+    <thead>
+        <tr>
+            <th>Seller</th>
+            <th>Condition</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @listings.where(card_id: @listing.card_id).each { |listing| %>
+        <% } %>
+    </tbody>
+</table>
 
 <% if @listing.user_id == current_user.id %>
     <%= "Do you want to edit this listing?" %>
