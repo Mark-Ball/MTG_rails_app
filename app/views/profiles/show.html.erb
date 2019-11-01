@@ -3,17 +3,19 @@
 <h1>Your profile</h1>
 
 <div>
-    Name: <%= @user.email %>
+    Name: <%= @user.name unless @user.nil? %>
 </div>
 <div>
-    Alias: <%= @user.email %>
+    Alias: <%= @user.alias unless @user.nil? %>
 </div>
+<% unless @address.nil? %>
+    <div>
+        Address: <%= @address.address %>
+        <%= @address.suburb %>
+        <%= @address.country %>
+        <%= @address.postcode %>
+    </div>
+<% end %>
 <div>
-    Address: <%= @address.address %>
-    <%= @address.suburb %>
-    <%= @address.country %>
-    <%= @address.postcode %>
-</div>
-<div>
-    Email: <%= @user.email %>
+    Email: <%= @user.email unless @user.nil? %>
 </div>

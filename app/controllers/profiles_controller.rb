@@ -5,4 +5,7 @@ class ProfilesController < ApplicationController
         @user = current_user
         @address = Address.where(user_id: current_user.id)[0]
     end
+
+    def edit
+    end
 end
