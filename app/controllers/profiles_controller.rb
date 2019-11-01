@@ -17,6 +17,23 @@ class ProfilesController < ApplicationController
             email: params[:profile][:email]
         )
 
+        if current_user.address.nil?
+            current.user.create_address(
+                address: params[:address][:address],
+                suburb: params[:address][:suburb],
+                city: params[:address][:city],
+                country: params[:address][:country],
+                postcode: params[:address][:postcode]
+            )
+        else
+            current_user.address.update(
+                address: params[:address][:address],
+                suburb: params[:address][:suburb],
+                city: params[:address][:city],
+                country: params[:address][:country],
+                postcode: params[:address][:postcode] 
+            )
+        end
         byebug
     end
 end
