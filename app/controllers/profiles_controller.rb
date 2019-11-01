@@ -35,4 +35,9 @@ class ProfilesController < ApplicationController
             )
         end
     end
+
+    def my_listings
+        @my_listings = current_user.listings
+        @cards = Card.all
+    end
 end

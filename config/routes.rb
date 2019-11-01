@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   put "/profile", to: "profiles#update"
   patch "/profile", to: "profiles#update"
   get "/profile/edit", to: "profiles#edit", as: "edit_profile"
+  get "/profile/my_listings", to: "profiles#my_listings", as: "my_listings"
 end

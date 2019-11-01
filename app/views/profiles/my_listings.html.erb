@@ -1,0 +1,25 @@
+<h1>My listings</h1>
+
+<h3>Active listings</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Card</th>
+            <th>Set</th>
+            <th>Price</th>
+            <th>Date listed</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @my_listings.each { |listing| %>
+            <tr>
+                <td><%= @cards.find(listing.card_id).name %></td>
+                <td><%= @cards.find(listing.card_id).set %></td>
+                <td><%= listing.price %></td>
+                <td><%= listing.created_at.to_s[0..9] %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<h3>Sold</h3>
