@@ -50,8 +50,15 @@ class ListingsController < ApplicationController
         redirect_to(listings_path)
     end
 
+    def update
+        Listing.find(params[:id]).update(
+            condition: params[:listing][:condition],
+            price: params[:listing][:price]
+        )
+        redirect_to(listing_path(params[:id]))
+    end
+
     def delete
-        byebug
         Listing.find(params[:id]).destroy
         redirect_to(listings_path)
     end

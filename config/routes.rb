@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get "/listings/new/confirm", to: "listings#confirm", as: "confirm_new_listing"
   get "/listings/:id/buy", to: "listings#buy", as: "buy_listing"
   get "/listings/:id", to: "listings#show", as: "listing"
+  put "/listings/:id", to: "listings#update"
+  patch "/listings/:id", to: "listings#update"
   delete "/listings/:id", to: "listings#delete"
 
   #routes for profiles
