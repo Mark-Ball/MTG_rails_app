@@ -42,10 +42,11 @@ class ListingsController < ApplicationController
     end
 
     def create #called with 'Create listing' button on /listings/new page
-        @listing = Listing.new(
-            card_id: params[:listing][:card_id],
+        current_user.listings.create(
             condition: params[:listing][:condition],
-            price: params[:listing][:price]
+            price: params[:listing][:price],
+            card_id: params[:listing][:card_id]
         )
+        redirect_to(listings_path)
     end
 end

@@ -34,6 +34,5 @@ class ProfilesController < ApplicationController
                 postcode: params[:address][:postcode] 
             )
         end
-        byebug
     end
 end
