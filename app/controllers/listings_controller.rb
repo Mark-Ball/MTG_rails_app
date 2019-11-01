@@ -49,4 +49,10 @@ class ListingsController < ApplicationController
         )
         redirect_to(listings_path)
     end
+
+    def delete
+        byebug
+        Listing.find(params[:id]).destroy
+        redirect_to(listings_path)
+    end
 end

@@ -13,7 +13,7 @@
     <tbody>
         <% @my_listings.each { |listing| %>
             <tr>
-                <td><%= @cards.find(listing.card_id).name %></td>
+                <td><%= link_to(@cards.find(listing.card_id).name, listing_path(listing.id)) %></td>
                 <td><%= @cards.find(listing.card_id).set %></td>
                 <td><%= listing.price %></td>
                 <td><%= listing.created_at.to_s[0..9] %></td>
