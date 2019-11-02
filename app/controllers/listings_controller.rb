@@ -1,4 +1,7 @@
 class ListingsController < ApplicationController
+    
+    #called when user clicks "Browse" in the top bar
+    #sends data to listings/index.html.erb
     def index
         @listing
         @listings = Listing.all.uniq { |listing| listing.card_id }
@@ -11,6 +14,8 @@ class ListingsController < ApplicationController
         @sets = Card.distinct.pluck(:set).sort
     end
 
+    #called when user clicks a card on listings/index.html.erb
+    #sends data to listings/show.html.erb
     def show
         @users = User.all
         @listing = Listing.find(params[:id])
@@ -18,13 +23,17 @@ class ListingsController < ApplicationController
         @card = Card.find(@listing.card_id)
     end
 
-    def buy
+    #called when user clicks "Buy" on the show page
+    #sends data to listings/buy.html.erb. 
+    def buy 
         listing = Listing.find(params[:id])
         @listing_price = listing.price
         @card_image = Card.find(listing.card_id).image
     end
 
-    def new #called by when getting new.html.erb 'Search' button on /listings/new page
+    #called when user clicks "Search" on listings/new.html.erb
+    #sends data to listings/new.html.erb
+    def new 
         @card = Card.new
 
         if params[:card].nil?
@@ -38,11 +47,15 @@ class ListingsController < ApplicationController
         end
     end
 
-    def confirm #called when getting confirm.html.erb, i.e. with 'Yes' button on /listings/new/
+    #called when user clicks "Yes" button on listings/new => new.html.erb
+    #sends data to listings/confirm.html.erb
+    def confirm 
         @card = Card.find(params[:card][:id])
     end
 
-    def create #called with 'Create listing' button on /listings/new page
+    #called with "Create listing" button on /listings/new/confirm => confirm.html.erb
+    #enters the new listing into the database
+    def create
         current_user.listings.create(
             condition: params[:listing][:condition],
             price: params[:listing][:price],
@@ -51,6 +64,8 @@ class ListingsController < ApplicationController
         redirect_to(listings_path)
     end
 
+    #called when "Update listing" button is pressed on /listings/:id => listings/show.html.erb
+    #updated record for the relevant listing
     def update
         Listing.find(params[:id]).update(
             condition: params[:listing][:condition],
@@ -59,6 +74,8 @@ class ListingsController < ApplicationController
         redirect_to(listing_path(params[:id]))
     end
 
+    #called when "Delete" button is pressed on /listings/:id => listings/show.html.erb
+    #deletes record for the relevant listing
     def delete
         Listing.find(params[:id]).destroy
         redirect_to(listings_path)
