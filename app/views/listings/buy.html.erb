@@ -10,5 +10,21 @@
 <form method="POST" action="<%= buy_listing_path %>">
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
     <input type="hidden" name="id" value="<%= @listing.id %>" />
-    <input type=submit value="Confirm" />
+    <input data-stripe="payment" type=submit value="Confirm" />
 </form>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  document
+    .querySelector("[data-stripe='payment']")
+    .addEventListener("click", () => {
+      const stripe = Stripe(
+        "<%= Rails.application.credentials.dig(:stripe, :public_key) %>"
+      );
+
+      stripe.redirectToCheckout({
+        sessionId: "<%= @session_id %>"
+      });
+    });
+</script>

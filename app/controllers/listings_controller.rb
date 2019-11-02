@@ -50,7 +50,6 @@ class ListingsController < ApplicationController
         )
     
         @session_id = session.id
-        byebug
     end
 
     #called when user clicks "Confirm" on listings/id/buy page => listings/buy.html.erb
