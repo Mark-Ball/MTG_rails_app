@@ -19,8 +19,9 @@ class ListingsController < ApplicationController
     end
 
     def buy
-        @listing = Listing.find(params[:id])
-        @cards = Card.all
+        listing = Listing.find(params[:id])
+        @listing_price = listing.price
+        @card_image = Card.find(listing.card_id).image
     end
 
     def new #called by when getting new.html.erb 'Search' button on /listings/new page

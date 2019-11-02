@@ -1,9 +1,9 @@
-<%= render "top_bar" %>
+<%= render "partials/top_bar" %>
 
 <h1>You are about to purchase the following card</h1>
 
-<%= image_tag @cards.find(@listing.card_id).image %>
-
-<%= number_to_currency(@listing.price / 100.0) %>
-
+<div>
+    <%= image_tag @card_image %>
+    <%= number_to_currency(@listing_price / 100.0) %>
+</div>
 Confirm button

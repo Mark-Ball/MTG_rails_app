@@ -4,22 +4,23 @@
 
 <%= image_tag @card.image if @card.image.attached? %>
 
-<% for listing in @listings %>
-    <ul>
-        <li><%= "Seller: #{@users.find(listing.user_id).email}, Condition: #{listing.condition}, Price: #{number_to_currency(listing.price / 100.0)}" %></li>
-    </ul>
-<% end %>
-
 <table>
     <thead>
         <tr>
             <th>Seller</th>
             <th>Condition</th>
             <th>Price</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <% @listings.where(card_id: @listing.card_id).each { |listing| %>
+        <% @listings.each { |listing| %>
+            <tr>
+                <td><%= @users.find(listing.user_id).email %></td>
+                <td><%= listing.condition %></td>
+                <td><%= number_to_currency(listing.price / 100.0) %></td>
+                <td><%= link_to("Buy", buy_listing_path(listing.id)) %></td>
+            </tr>
         <% } %>
     </tbody>
 </table>
