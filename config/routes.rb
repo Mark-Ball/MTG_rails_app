@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "/listings", to: "listings#index", as: "listings"
   post "/listings", to: "listings#create"
   get "/listings/new", to: "listings#new", as: "new_listing"
-  get "/listings/new/confirm", to: "listings#confirm", as: "confirm_new_listing"
+  get "/listings/new/confirm", to: "listings#confirm_new", as: "confirm_new_listing"
   get "/listings/:id/buy", to: "listings#buy", as: "buy_listing"
   post "/listings/:id/buy", to: "listings#confirm_buy"
   get "/listings/:id", to: "listings#show", as: "listing"

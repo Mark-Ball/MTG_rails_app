@@ -31,6 +31,12 @@ class ListingsController < ApplicationController
         @card_image = Card.find(listing.card_id).image
     end
 
+    #called when user clicks "Confirm" on listings/id/buy page => listings/buy.html.erb
+    #creates records in database
+    def confirm_buy
+
+    end
+
     #called when user clicks "Search" on listings/new.html.erb
     #sends data to listings/new.html.erb
     def new 
@@ -49,7 +55,7 @@ class ListingsController < ApplicationController
 
     #called when user clicks "Yes" button on listings/new => new.html.erb
     #sends data to listings/confirm.html.erb
-    def confirm 
+    def confirm_new 
         @card = Card.find(params[:card][:id])
     end
 
