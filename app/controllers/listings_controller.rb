@@ -45,7 +45,7 @@ class ListingsController < ApplicationController
                     listing_id: @listing.id
                 }
             },
-            success_url: "#{root_url}payments/success?userId=#{current_user.id}&listingId=#{@listing.id}",
+            success_url: "#{root_url}payments/success",
             cancel_url: "#{root_url}listings"
         )
     
@@ -55,11 +55,11 @@ class ListingsController < ApplicationController
     #called when user clicks "Confirm" on listings/id/buy page => listings/buy.html.erb
     #creates records in database
     def confirm_buy
-        current_user.purchases.create(
-            listing_id: params[:id],
-            purchase_id: 1234,
-        )
-        redirect_to(listings_path)
+        # current_user.purchases.create(
+        #     listing_id: params[:id],
+        #     purchase_id: 1234,
+        # )
+        # redirect_to(listings_path)
     end
 
     #called when user clicks "Search" on listings/new.html.erb

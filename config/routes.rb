@@ -25,4 +25,5 @@ Rails.application.routes.draw do
 
   #routes for payments
   get "/payments/success", to: "payments#success", as: "successful_payment"
+  post "/payments/webhook", to: "payments#webhook"
 end
