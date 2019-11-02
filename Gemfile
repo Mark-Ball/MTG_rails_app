@@ -66,3 +66,5 @@ gem "devise", "~> 4.7"
 gem "httparty", "~> 0.17.1"
 
 gem "down", "~> 5.0"
+
+gem "stripe", "~> 5.7"
