@@ -4,10 +4,11 @@
 
 <div>
     <%= image_tag @card_image %>
-    <%= number_to_currency(@listing_price / 100.0) %>
+    <%= number_to_currency(@listing.price / 100.0) %>
 </div>
 
-<form>
-
+<form method="POST" action="<%= buy_listing_path %>">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <input type="hidden" name="id" value="<%= @listing.id %>" />
+    <input type=submit value="Confirm" />
 </form>
-Confirm button

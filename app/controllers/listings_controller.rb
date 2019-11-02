@@ -26,15 +26,18 @@ class ListingsController < ApplicationController
     #called when user clicks "Buy" on the show page
     #sends data to listings/buy.html.erb. 
     def buy 
-        listing = Listing.find(params[:id])
-        @listing_price = listing.price
-        @card_image = Card.find(listing.card_id).image
+        @listing = Listing.find(params[:id])
+        @card_image = Card.find(@listing.card_id).image
     end
 
     #called when user clicks "Confirm" on listings/id/buy page => listings/buy.html.erb
     #creates records in database
     def confirm_buy
-
+        current_user.purchases.create(
+            listing_id: params[:id],
+            purchase_id: 1234,
+        )
+        redirect_to(listings_path)
     end
 
     #called when user clicks "Search" on listings/new.html.erb

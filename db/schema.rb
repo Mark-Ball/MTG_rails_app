@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_235228) do
+ActiveRecord::Schema.define(version: 2019_11_02_030547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,22 +94,10 @@ ActiveRecord::Schema.define(version: 2019_10_31_235228) do
     t.bigint "user_id"
     t.bigint "listing_id"
     t.string "purchase_id"
-    t.date "purchase_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["listing_id"], name: "index_purchases_on_listing_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "listing_id"
-    t.string "purchase_id"
-    t.date "transaction_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["listing_id"], name: "index_transactions_on_listing_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -132,6 +120,4 @@ ActiveRecord::Schema.define(version: 2019_10_31_235228) do
   add_foreign_key "listings", "users"
   add_foreign_key "purchases", "listings"
   add_foreign_key "purchases", "users"
-  add_foreign_key "transactions", "listings"
-  add_foreign_key "transactions", "users"
 end
