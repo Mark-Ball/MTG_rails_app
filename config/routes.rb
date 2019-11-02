@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   patch "/profile", to: "profiles#update"
   get "/profile/edit", to: "profiles#edit", as: "edit_profile"
   get "/profile/my_listings", to: "profiles#my_listings", as: "my_listings"
+
+  #routes for payments
+  get "/payments/success", to: "payments#success", as: "successful_payment"
 end
