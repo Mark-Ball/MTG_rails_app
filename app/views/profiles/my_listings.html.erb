@@ -1,3 +1,5 @@
+<%= render "partials/top_bar" %>
+
 <h1>My listings</h1>
 
 <h3>Active listings</h3>
@@ -15,7 +17,7 @@
             <tr>
                 <td><%= link_to(@cards.find(listing.card_id).name, listing_path(listing.id)) %></td>
                 <td><%= @cards.find(listing.card_id).set %></td>
-                <td><%= listing.price %></td>
+                <td><%= number_to_currency(listing.price / 100.0) %></td>
                 <td><%= listing.created_at.to_s[0..9] %></td>
             </tr>
         <% } %>
@@ -23,3 +25,45 @@
 </table>
 
 <h3>Sold</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Card</th>
+            <th>Set</th>
+            <th>Price</th>
+            <th>Date sold</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @sold.each { |listing| %>
+            <tr>
+                <td><%= @cards.find(listing.card_id).name %></td>
+                <td><%= @cards.find(listing.card_id).set %></td>
+                <td><%= number_to_currency(listing.price / 100.0) %></td>
+                <td><%= @purchases.find_by_listing_id(listing.id).created_at.to_s[0..9] %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<h3>Purchased</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Card</th>
+            <th>Set</th>
+            <th>Price</th>
+            <th>Date purchased</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @purchased.each { |listing| %>
+            <tr>
+                <td><%= @cards.find(listing.card_id).name %></td>
+                <td><%= @cards.find(listing.card_id).set %></td>
+                <td><%= number_to_currency(listing.price / 100.0) %></td>
+                <td><%= listing.created_at.to_s[0..9] %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
