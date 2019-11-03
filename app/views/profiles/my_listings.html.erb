@@ -62,7 +62,7 @@
                 <td><%= @cards.find(listing.card_id).name %></td>
                 <td><%= @cards.find(listing.card_id).set %></td>
                 <td><%= number_to_currency(listing.price / 100.0) %></td>
-                <td><%= listing.created_at.to_s[0..9] %></td>
+                <td><%= @purchases.find_by_listing_id(listing.id).created_at.to_s[0..9] %></td>
             </tr>
         <% } %>
     </tbody>
