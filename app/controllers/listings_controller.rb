@@ -4,9 +4,15 @@ class ListingsController < ApplicationController
     #sends data to listings/index.html.erb
     def index
         @listing
-        @listings = Listing.all.uniq { |listing| listing.card_id }
+
+        #create the array of ids for listings still available (i.e. not sold yet)
+        listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
+
+        #send the view only the available listings and only unique cards to render
+        @listings = Listing.where(id: listings_available).uniq { |l| l.card_id }
         @cards = Card.all
 
+        #variables for search functionality
         @card_types = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Sorcery']
         @rarities = Card.distinct.pluck(:rarity).sort
         # [['Mythic', 1], ['Rare', 2], ['Uncommon', 3], ['Common', 4]]
@@ -52,15 +58,6 @@ class ListingsController < ApplicationController
         @session_id = session.id
     end
 
-    #called when user clicks "Confirm" on listings/id/buy page => listings/buy.html.erb
-    #creates records in database
-    def confirm_buy
-        # current_user.purchases.create(
-        #     listing_id: params[:id],
-        #     purchase_id: 1234,
-        # )
-        # redirect_to(listings_path)
-    end
 
     #called when user clicks "Search" on listings/new.html.erb
     #sends data to listings/new.html.erb
