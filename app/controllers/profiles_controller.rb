@@ -11,12 +11,11 @@ class ProfilesController < ApplicationController
     end
 
     def update
-        byebug
         current_user.update(
             name: params[:user][:name],
             alias: params[:user][:alias],
-            email: params[:user][:email]
-            # image: params[:profile][:image]
+            email: params[:user][:email],
+            image: params[:user][:image]
         )
 
         # current_user.image.attach(io: params[:profile][:image], filename: "#{current_user.email}_#{current_user.name}.jpg")
@@ -38,6 +37,7 @@ class ProfilesController < ApplicationController
                 postcode: params[:address][:postcode] 
             )
         end
+        redirect_to(profile_path)
     end
 
     def my_listings

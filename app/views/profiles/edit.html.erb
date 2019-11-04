@@ -36,5 +36,9 @@
             <%= address_form.text_field :postcode %>
         </div>
     <% end %>
+    <div>
+        <%= user_form.label :image %>
+        <%= user_form.file_field :image, accept: "image/png, image/jpeg, image/jpg" %>
+    </div>
     <%= user_form.submit value="Update" %>
 <% end %>
