@@ -1,7 +1,5 @@
 <%= render "partials/top_bar" %>
 
-<h3>image</h3>
-
 <h3>Filters</h3>
 
 <%= form_with(model: @listing, url: listings_path, method: "get", local: true) do |form| %>
@@ -58,7 +56,6 @@
     <%= link_to listing_path(@listings[index].id), :action => 'go' do %>
         <div>
             <%= image_tag img if img.attached? %>
-            <%= number_to_currency(listing.price / 100.0) %>
         </div>
     <% end %>
 <% } %>
