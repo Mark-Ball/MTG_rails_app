@@ -1,40 +1,40 @@
 <%= render "partials/top_bar" %>
 
 <h1>Edit your profile</h1>
-
-<form method="POST" action="<%= profile_path %>">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-    <input type=hidden name="_method" value="put" />
+<%= form_with(model: @user, url: profile_path, method: "put", local: true) do |user_form| %>
     <div>
-        <label for="name">Name</label>
-        <input type="text_field" name="profile[name]" id="name" />
+        <%= user_form.label :name %>
+        <%= user_form.text_field :name %>
     </div>
     <div>
-        <label for="alias">Alias</label>
-        <input type="text_field" name="profile[alias]" id="alias" />
+        <%= user_form.label :alias %>
+        <%= user_form.text_field :alias %>
     </div>
     <div>
-        <label for="email">Email</label>
-        <input type="text_field" name="profile[email]" id="email" />
+        <%= user_form.label :email %>
+        <%= user_form.text_field :email %>
     </div>
-    <div>
-        <label for="address">Address</label>
-        <input type="text_field" name="address[address]" id="address" />
-    </div>    <div>
-        <label for="suburb">Suburb</label>
-        <input type="text_field" name="address[suburb]" id="suburb" />
-    </div>
-    <div>
-        <label for="city">City</label>
-        <input type="text_field" name="address[city]" id="city" />
-    </div>
-    <div>
-        <label for="country">Country</label>
-        <input type="text_field" name="address[country]" id="country" />
-    </div>
-    <div>
-        <label for="postcode">Postcode</label>
-        <input type="text_field" name="address[postcode]" id="postcode" />
-    </div>
-    <input type="submit" value="Update" />
-</form>
+    <%= fields_for :address, @user.address do |address_form| %>
+        <div>
+            <%= address_form.label :address %>
+            <%= address_form.text_field :address %>
+        </div>
+        <div>
+            <%= address_form.label :suburb %>
+            <%= address_form.text_field :suburb %>
+        </div>
+        <div>
+            <%= address_form.label :city %>
+            <%= address_form.text_field :city %>
+        </div>
+        <div>
+            <%= address_form.label :country %>
+            <%= address_form.text_field :country %>
+        </div>
+        <div>
+            <%= address_form.label :postcode %>
+            <%= address_form.text_field :postcode %>
+        </div>
+    <% end %>
+    <%= user_form.submit value="Update" %>
+<% end %>

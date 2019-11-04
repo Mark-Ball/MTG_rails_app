@@ -2,6 +2,8 @@
 
 <h1>Your profile</h1>
 
+<%= image_tag @user.image if @user.image.attached? %>
+
 <div>
     Name: <%= @user.name unless @user.nil? %>
 </div>

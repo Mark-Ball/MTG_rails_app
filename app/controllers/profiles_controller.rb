@@ -11,11 +11,15 @@ class ProfilesController < ApplicationController
     end
 
     def update
+        byebug
         current_user.update(
-            name: params[:profile][:name],
-            alias: params[:profile][:alias],
-            email: params[:profile][:email]
+            name: params[:user][:name],
+            alias: params[:user][:alias],
+            email: params[:user][:email]
+            # image: params[:profile][:image]
         )
+
+        # current_user.image.attach(io: params[:profile][:image], filename: "#{current_user.email}_#{current_user.name}.jpg")
 
         if current_user.address.nil?
             current.user.create_address(
