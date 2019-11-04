@@ -1,61 +1,67 @@
-<%= render "partials/top_bar" %>
+<div id="index">
+    <%= render "partials/top_bar" %>
 
-<h3>Filters</h3>
+    <div class="filter">
+        <h3>Filters</h3>
 
-<%= form_with(model: @listing, url: listings_path, method: "get", local: true) do |form| %>
-    <div>
-        <%= form.label(:name) %>
-        <%= form.text_field(:name) %>
+        <%= form_with(model: @listing, url: listings_path, method: "get", local: true) do |form| %>
+            <div>
+                <%= form.label(:name) %>
+                <%= form.text_field(:name) %>
+            </div>
+            Colors
+            <div>
+                <%= form.label(:black) %>
+                <%= form.check_box(:black) %>
+            </div>
+                <div>
+                <%= form.label(:blue) %>
+                <%= form.check_box(:blue) %>
+            </div>
+                <div>
+                <%= form.label(:green) %>
+                <%= form.check_box(:green) %>
+            </div>
+                <div>
+                <%= form.label(:red) %>
+                <%= form.check_box(:red) %>
+            </div>
+                <div>
+                <%= form.label(:white) %>
+                <%= form.check_box(:white) %>
+            </div>
+            <div>
+                <%= form.label(:manacost) %>
+                <%= form.text_field(:manacost) %>
+            </div>
+            <div>
+                <%= form.label(:type) %>
+                <%= select_tag(:type, options_for_select(@card_types)) %>
+            </div>
+            <div>
+                <%= form.label(:rarity) %>
+                <%= select_tag(:rarity, options_for_select(@rarities)) %>
+            </div>
+            <div>
+                <%= form.label(:condition) %>
+                <%= select_tag(:condition, options_for_select(@conditions)) %>
+            </div>
+            <div>
+                <%= form.label(:set) %>
+                <%= select_tag(:set, options_for_select(@sets)) %>
+            </div>
+                <%= submit_tag("Filter") %>
+        <% end %>
     </div>
-    Colors
-    <div>
-        <%= form.label(:black) %>
-        <%= form.check_box(:black) %>
-    </div>
-        <div>
-        <%= form.label(:blue) %>
-        <%= form.check_box(:blue) %>
-    </div>
-        <div>
-        <%= form.label(:green) %>
-        <%= form.check_box(:green) %>
-    </div>
-        <div>
-        <%= form.label(:red) %>
-        <%= form.check_box(:red) %>
-    </div>
-        <div>
-        <%= form.label(:white) %>
-        <%= form.check_box(:white) %>
-    </div>
-    <div>
-        <%= form.label(:manacost) %>
-        <%= form.text_field(:manacost) %>
-    </div>
-    <div>
-        <%= form.label(:type) %>
-        <%= select_tag(:type, options_for_select(@card_types)) %>
-    </div>
-    <div>
-        <%= form.label(:rarity) %>
-        <%= select_tag(:rarity, options_for_select(@rarities)) %>
-    </div>
-    <div>
-        <%= form.label(:condition) %>
-        <%= select_tag(:condition, options_for_select(@conditions)) %>
-    </div>
-    <div>
-        <%= form.label(:set) %>
-        <%= select_tag(:set, options_for_select(@sets)) %>
-    </div>
-        <%= submit_tag("Filter") %>
-<% end %>
 
-<% @listings.each_with_index { |listing, index| %>
-    <% img = @cards.find(listing.card_id).image %>
-    <%= link_to listing_path(@listings[index].id), :action => 'go' do %>
-        <div>
-            <%= image_tag img if img.attached? %>
-        </div>
-    <% end %>
-<% } %>
+    <div class="cards-container">
+        <% @listings.each_with_index { |listing, index| %>
+            <% img = @cards.find(listing.card_id).image %>
+            <%= link_to listing_path(@listings[index].id), :action => 'go' do %>
+                <div class="card">
+                    <%= image_tag img if img.attached? %>
+                </div>
+            <% end %>
+        <% } %>
+    </div>
+</div>

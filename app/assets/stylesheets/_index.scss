@@ -1,0 +1,24 @@
+#index {
+    display: flex;
+    flex-flow: column nowrap;
+
+    max-width: 100%;
+
+    .filter {
+        height: 100%;
+    }
+
+    .cards-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-content: left;
+    }
+
+    .card {
+        margin-bottom: 30px;
+    }
+
+
+
+}
