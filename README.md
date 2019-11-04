@@ -204,7 +204,7 @@ magicthegathering.io provides endpoints for groups of cards (this is the main en
 
 Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers. In total approximately 47,000 records were downloaded.
 
-#### Down
+#### Down gem
 
 Github: https://github.com/janko/down
 
@@ -214,6 +214,12 @@ The result was that active_storage_blobs stored each image and active_storage_at
 
 The only use of Down was to seed the database, although in future Down will be used when new sets are released to download the images for those new records. 
 
+#### Devise gem
+
+Devise is a Ruby gem which provides a flexible authentication solution. In MTG-marketplace, Devise was used to generate the users table in the database, user model, controllers (not in the rails files), and views relating to signing in, registering, and resetting passwords.
+
+One of the most important functions of Devise is to make the 'current_user' variable available, which makes it much easier to attach other objects such as listings, addresses, and images to a specific user. 'current_user' can also be used to display different information to different users depending on which user is logged in.
+
 #### Stripe
 
 Stripe is the payment system used in MTG-marketplace.
@@ -222,7 +228,7 @@ Stripe is the payment system used in MTG-marketplace.
 
 The following were used in the creation of MTG-marketplace:
 - Ruby
-    - Gems: Down, Devise, Stripe
+    - Gems: Down, Devise, Stripe, ultrahook
 - Rails
 - HTML
 - CSS
@@ -288,3 +294,6 @@ Screenshots of the Trello board used to track progress through the project are p
 
 ![trello_3](docs/trello_3.jpg)
 <strong>Figure 3. Trello board at end of Day 5</strong>
+
+![trello_4](docs/trello_4.jpg)
+<strong>Figure 4. Trello board at end of Day 8</strong>
