@@ -1,0 +1,14 @@
+#top_bar {
+    display: flex;
+    justify-content: space-between;
+    
+    a { 
+        color: black;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #fff200;
+    }
+
+}
