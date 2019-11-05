@@ -15,13 +15,21 @@
         align-items: center;
     }
 
+    .img-margin {
+        margin-top: 100px;
+
+        object-fit: cover;
+        height: 250px;
+        max-width: 250px;
+    }
+
     p {
+        color: black;
         font-size: 24px;
         font-weight: bold;
     }
 
-    .img-margin {
-        margin-top: 100px;
+    a {
+        text-decoration: none;
     }
-
 }
