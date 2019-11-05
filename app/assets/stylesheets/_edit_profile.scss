@@ -1,0 +1,39 @@
+#edit-profile {
+    margin-left:auto;
+    margin-right: auto;
+    max-width: 900px;
+
+    .flex-col {
+        display: flex;
+        justify-content: center;
+    }
+
+    label {
+        display: inline-block;
+        margin-right: 30px;
+        text-align: left;
+        width: 100px;
+    }
+
+    input {
+        background-color: white;
+        border: 1px solid #D5D5D5;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .button {
+        background-image: linear-gradient(#EEE, #DDD);
+        border: 1px solid #D5D5D5;
+        border-radius: 3px;
+        color: black;
+        font-weight: bold;
+        height: 40px;
+        width: 100px;
+    }
+
+    .button:hover {
+        background-image: linear-gradient(#fff634, #cec72a);
+    }
+}

@@ -49,7 +49,6 @@ class ProfilesController < ApplicationController
         still_available = listings_ids - sold_ids
         #passing only listings owned by the user which are still available to the view
         @my_listings = Listing.find(still_available)
-        byebug
         
         #creating the array of sold items
         list_of_sales = Listing.where(user_id: current_user.id).ids & Purchase.all.map { |i| i.listing_id }

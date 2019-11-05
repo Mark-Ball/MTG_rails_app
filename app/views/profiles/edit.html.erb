@@ -1,44 +1,48 @@
-<%= render "partials/top_bar" %>
+<div id="edit-profile">
+    <%= render "partials/top_bar" %>
 
-<h1>Edit your profile</h1>
-<%= form_with(model: @user, url: profile_path, method: "put", local: true) do |user_form| %>
-    <div>
-        <%= user_form.label :name %>
-        <%= user_form.text_field :name %>
+    <h1>Edit your profile</h1>
+    <div class="flex-col">
+        <%= form_with(model: @user, url: profile_path, method: "put", local: true) do |user_form| %>
+            <div>
+                <%= user_form.label :name %>
+                <%= user_form.text_field :name %>
+            </div>
+            <div>
+                <%= user_form.label :alias %>
+                <%= user_form.text_field :alias %>
+            </div>
+            <div>
+                <%= user_form.label :email %>
+                <%= user_form.text_field :email %>
+            </div>
+            <%= fields_for :address, @user.address do |address_form| %>
+                <div>
+                    <%= address_form.label :address %>
+                    <%= address_form.text_field :address %>
+                </div>
+                <div>
+                    <%= address_form.label :suburb %>
+                    <%= address_form.text_field :suburb %>
+                </div>
+                <div>
+                    <%= address_form.label :city %>
+                    <%= address_form.text_field :city %>
+                </div>
+                <div>
+                    <%= address_form.label :country %>
+                    <%= address_form.text_field :country %>
+                </div>
+                <div>
+                    <%= address_form.label :postcode %>
+                    <%= address_form.text_field :postcode %>
+                </div>
+            <% end %>
+            <div>
+                <%= user_form.label :image %>
+                <%= user_form.file_field :image, accept: "image/png, image/jpeg, image/jpg" %>
+            </div>
+            <%= user_form.submit value="Update", class: "button" %>
+        <% end %>
     </div>
-    <div>
-        <%= user_form.label :alias %>
-        <%= user_form.text_field :alias %>
-    </div>
-    <div>
-        <%= user_form.label :email %>
-        <%= user_form.text_field :email %>
-    </div>
-    <%= fields_for :address, @user.address do |address_form| %>
-        <div>
-            <%= address_form.label :address %>
-            <%= address_form.text_field :address %>
-        </div>
-        <div>
-            <%= address_form.label :suburb %>
-            <%= address_form.text_field :suburb %>
-        </div>
-        <div>
-            <%= address_form.label :city %>
-            <%= address_form.text_field :city %>
-        </div>
-        <div>
-            <%= address_form.label :country %>
-            <%= address_form.text_field :country %>
-        </div>
-        <div>
-            <%= address_form.label :postcode %>
-            <%= address_form.text_field :postcode %>
-        </div>
-    <% end %>
-    <div>
-        <%= user_form.label :image %>
-        <%= user_form.file_field :image, accept: "image/png, image/jpeg, image/jpg" %>
-    </div>
-    <%= user_form.submit value="Update" %>
-<% end %>
+</div>
