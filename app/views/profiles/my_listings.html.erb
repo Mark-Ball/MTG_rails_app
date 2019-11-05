@@ -1,69 +1,71 @@
-<%= render "partials/top_bar" %>
+<div id="my-listings">
+    <%= render "partials/top_bar" %>
 
-<h1>My listings</h1>
+    <h1>My listings</h1>
 
-<h3>Active listings</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Card</th>
-            <th>Set</th>
-            <th>Price</th>
-            <th>Date listed</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @my_listings.each { |listing| %>
+    <h3>Active listings</h3>
+    <table>
+        <thead>
             <tr>
-                <td><%= link_to(@cards.find(listing.card_id).name, listing_path(listing.id)) %></td>
-                <td><%= @cards.find(listing.card_id).set %></td>
-                <td><%= number_to_currency(listing.price / 100.0) %></td>
-                <td><%= listing.created_at.to_s[0..9] %></td>
+                <th class="table_left-align">Card</th>
+                <th>Set</th>
+                <th>Price</th>
+                <th>Date listed</th>
             </tr>
-        <% } %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% @my_listings.each { |listing| %>
+                <tr>
+                    <td class="table_left-align"><%= link_to(@cards.find(listing.card_id).name, listing_path(listing.id)) %></td>
+                    <td><%= @cards.find(listing.card_id).set %></td>
+                    <td><%= number_to_currency(listing.price / 100.0) %></td>
+                    <td><%= listing.created_at.to_s[0..9] %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
 
-<h3>Sold</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Card</th>
-            <th>Set</th>
-            <th>Price</th>
-            <th>Date sold</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @sold.each { |listing| %>
+    <h3>Sold</h3>
+    <table>
+        <thead>
             <tr>
-                <td><%= @cards.find(listing.card_id).name %></td>
-                <td><%= @cards.find(listing.card_id).set %></td>
-                <td><%= number_to_currency(listing.price / 100.0) %></td>
-                <td><%= @purchases.find_by_listing_id(listing.id).created_at.to_s[0..9] %></td>
+                <th class="table_left-align">Card</th>
+                <th>Set</th>
+                <th>Price</th>
+                <th>Date sold</th>
             </tr>
-        <% } %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% @sold.each { |listing| %>
+                <tr>
+                    <td class="table_left-align"><%= @cards.find(listing.card_id).name %></td>
+                    <td><%= @cards.find(listing.card_id).set %></td>
+                    <td><%= number_to_currency(listing.price / 100.0) %></td>
+                    <td><%= @purchases.find_by_listing_id(listing.id).created_at.to_s[0..9] %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
 
-<h3>Purchased</h3>
-<table>
-    <thead>
-        <tr>
-            <th>Card</th>
-            <th>Set</th>
-            <th>Price</th>
-            <th>Date purchased</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @purchased.each { |listing| %>
+    <h3>Purchased</h3>
+    <table>
+        <thead>
             <tr>
-                <td><%= @cards.find(listing.card_id).name %></td>
-                <td><%= @cards.find(listing.card_id).set %></td>
-                <td><%= number_to_currency(listing.price / 100.0) %></td>
-                <td><%= @purchases.find_by_listing_id(listing.id).created_at.to_s[0..9] %></td>
+                <th class="table_left-align">Card</th>
+                <th>Set</th>
+                <th>Price</th>
+                <th>Date purchased</th>
             </tr>
-        <% } %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% @purchased.each { |listing| %>
+                <tr>
+                    <td class="table_left-align"><%= @cards.find(listing.card_id).name %></td>
+                    <td><%= @cards.find(listing.card_id).set %></td>
+                    <td><%= number_to_currency(listing.price / 100.0) %></td>
+                    <td><%= @purchases.find_by_listing_id(listing.id).created_at.to_s[0..9] %></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
