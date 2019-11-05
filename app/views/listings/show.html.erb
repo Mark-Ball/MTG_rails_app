@@ -1,46 +1,52 @@
-<%= render "partials/top_bar" %>
+<div id="show">
+    <%= render "partials/top_bar" %>
 
-<h1><%= @card.name %></h1>
+    <h1><%= @card.name %></h1>
 
-<%= image_tag @card.image if @card.image.attached? %>
+    <div class="center">
+        <%= image_tag @card.image if @card.image.attached? %>
+    </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Seller</th>
-            <th>Condition</th>
-            <th>Price</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @listings.each { |listing| %>
-            <tr>
-                <td><%= @users.find(listing.user_id).email %></td>
-                <td><%= listing.condition %></td>
-                <td><%= number_to_currency(listing.price / 100.0) %></td>
-                <td><%= link_to("Buy", buy_listing_path(listing.id)) %></td>
-            </tr>
-        <% } %>
-    </tbody>
-</table>
+    <div class="center table">
+        <table>
+            <thead>
+                <tr>
+                    <th class="table_left-align">Seller</th>
+                    <th>Condition</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @listings.each { |listing| %>
+                    <tr>
+                        <td class="table_left-align"><%= @users.find(listing.user_id).email %></td>
+                        <td><%= listing.condition %></td>
+                        <td><%= number_to_currency(listing.price / 100.0) %></td>
+                        <td><%= link_to('<button type="button">Buy</button>'.html_safe, buy_listing_path(listing.id)) %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
 
-<% if @listing.user_id == current_user.id %>
-    <%= "Do you want to edit this listing?" %>
-    <%= form_with(model: @listing, local: true) do |form| %>
-        <div>
-            <%= form.label :condition %>
-            <%= form.text_field :condition %>
-        </div>
-        <div>
-            <%= form.label :price %>
-            <%= form.text_field :price %>
-        </div>
-        <%= form.submit %> 
+    <% if @listing.user_id == current_user.id %>
+        <%= "Do you want to edit this listing?" %>
+        <%= form_with(model: @listing, local: true) do |form| %>
+            <div>
+                <%= form.label :condition %>
+                <%= form.text_field :condition %>
+            </div>
+            <div>
+                <%= form.label :price %>
+                <%= form.text_field :price %>
+            </div>
+            <%= form.submit %> 
+        <% end %>
+
+        <%= "Do you want to delete this listing?" %>
+        <%= form_with(url: listing_path, method: "delete") do %>
+            <%= submit_tag("Delete") %>
+        <% end %>
     <% end %>
-
-    <%= "Do you want to delete this listing?" %>
-    <%= form_with(url: listing_path, method: "delete") do %>
-        <%= submit_tag("Delete") %>
-    <% end %>
-<% end %>
+<div>
