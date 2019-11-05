@@ -1,29 +1,62 @@
-<%= render "partials/top_bar" %>
+<div id="show-profile">
+    <%= render "partials/top_bar" %>
 
-<h1>Your profile</h1>
+    <h1>Your profile</h1>
 
-<%= image_tag @user.image if @user.image.attached? %>
+    <div class="flex-container">
+        <%= image_tag @user.image if @user.image.attached? %>
 
-<div>
-    Name: <%= @user.name unless @user.nil? %>
-</div>
-<div>
-    Alias: <%= @user.alias unless @user.nil? %>
-</div>
-<% unless @address.nil? %>
-    <div>
-        Address: <%= @address.address %>
-        <%= @address.suburb %>
-        <%= @address.country %>
-        <%= @address.postcode %>
+        <div class="flex-col">
+            <%= link_to('<button type="button">Edit profile</button>'.html_safe, edit_profile_path) %>
+
+            <%= link_to('<button type="button">Create new listing</button>'.html_safe, new_listing_path) %>
+
+            <%= link_to('<button type="button">My listings</button>'.html_safe, my_listings_path) %>
+        </div>
     </div>
-<% end %>
-<div>
-    Email: <%= @user.email unless @user.nil? %>
+
+    <div class="flex-centered">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>   
+                    <td>Name:</td>
+                    <td><%= @user.name if @user %></td>
+                </tr>
+                <tr>   
+                    <td>Alias:</td>
+                    <td><%= @user.alias if @user %></td>
+                </tr>
+                <tr>   
+                    <td>Address:</td>
+                    <td><%= @address.address if @address %></td>
+                </tr>
+                <tr>   
+                    <td></td>
+                    <td><%= @address.suburb if @address %></td>
+                </tr>
+                <tr>   
+                    <td></td>
+                    <td><%= @address.city if @address %></td>
+                </tr>
+                <tr>   
+                    <td></td>
+                    <td><%= @address.country if @address %></td>
+                </tr>
+                <tr>   
+                    <td></td>
+                    <td><%= @address.postcode if @address %></td>
+                </tr>
+                <tr>   
+                    <td>Email:</td>
+                    <td><%= @user.email if @user %></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-
-<%= link_to("Edit profile", edit_profile_path) %>
-
-<%= link_to("Create new listing", new_listing_path) %>
-
-<%= link_to("My listings", my_listings_path) %>

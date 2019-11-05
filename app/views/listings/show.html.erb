@@ -4,11 +4,9 @@
     <h1><%= @card.name %></h1>
 
     <div class="flex-container">
-        <div class="center">
-            <%= image_tag @card.image if @card.image.attached? %>
-        </div>
+        <%= image_tag @card.image if @card.image.attached? %>
 
-        <div class="center table">
+        <div>
             <table>
                 <thead>
                     <tr>
