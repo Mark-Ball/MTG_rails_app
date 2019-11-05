@@ -1,39 +1,43 @@
-<%= render "partials/top_bar" %>
+<div id="new-listing">
+    <%= render "partials/top_bar" %>
 
-<h1>Enter the details for the card you wish to list</h1>
+    <h1>Enter the details for the card you wish to list</h1>
 
-<%= form_with(model: @card, url: new_listing_path, method: "get", local: true) do |form| %>
-    <div>
-        <%= form.label(:name) %>
-        <%= form.text_field(:name) %>
-    </div>
-    <div>
-        <%= form.label(:set) %>
-        <%= form.text_field(:set) %>
-    </div>
-        <%= submit_tag("Search") %>
-<% end %>
+    <div class="flex-col">
+        <%= form_with(model: @card, url: new_listing_path, method: "get", local: true) do |form| %>
+            <div>
+                <%= form.label(:name) %>
+                <%= form.text_field(:name) %>
+            </div>
+            <div>
+                <%= form.label(:set) %>
+                <%= form.text_field(:set) %>
+            </div>
+                <%= submit_tag "Search", class: "button" %>
+        <% end %>
 
-<% if @cards != nil %>
-    <% if @cards.empty? %>
-        <p><%= "There were no cards that matched your search" %></p>
-    <% else %>
-        <% for card in @cards %>
-            <%= link_to confirm_new_listing_path, :action => 'go' do %>
-                <div>
-                    <%= image_tag card.image if card.image.attached? %>
-                    <%= card.id %>
-                </div>
+        <% if @cards != nil %>
+            <% if @cards.empty? %>
+                <p><%= "There were no cards that matched your search" %></p>
+            <% else %>
+                <% for card in @cards %>
+                    <%= link_to confirm_new_listing_path, :action => 'go' do %>
+                        <div>
+                            <%= image_tag card.image if card.image.attached? %>
+                            <%= card.id %>
+                        </div>
+                    <% end %>
+                <% end %>
             <% end %>
         <% end %>
-    <% end %>
-<% end %>
 
-<% if @cards != nil %>
-    <h3>Is this the card you want to list?</h3>
-    <form method="GET" action="<%= confirm_new_listing_path %>">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-        <input type="hidden" name="card[id]" value="<%= @cards[0].id %>" />
-        <input class="button" type="submit" value="Yes" />
-    </form>
-<% end %>
+        <% if @cards != nil %>
+            <h3>Is this the card you want to list?</h3>
+            <form method="GET" action="<%= confirm_new_listing_path %>">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <input type="hidden" name="card[id]" value="<%= @cards[0].id %>" />
+                <input class="button" type="submit" value="Yes" />
+            </form>
+        <% end %>
+    </div>
+</div>
