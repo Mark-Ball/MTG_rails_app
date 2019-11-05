@@ -3,31 +3,33 @@
 
     <h1><%= @card.name %></h1>
 
-    <div class="center">
-        <%= image_tag @card.image if @card.image.attached? %>
-    </div>
+    <div class="flex-container">
+        <div class="center">
+            <%= image_tag @card.image if @card.image.attached? %>
+        </div>
 
-    <div class="center table">
-        <table>
-            <thead>
-                <tr>
-                    <th class="table_left-align">Seller</th>
-                    <th>Condition</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @listings.each { |listing| %>
+        <div class="center table">
+            <table>
+                <thead>
                     <tr>
-                        <td class="table_left-align"><%= @users.find(listing.user_id).email %></td>
-                        <td><%= listing.condition %></td>
-                        <td><%= number_to_currency(listing.price / 100.0) %></td>
-                        <td><%= link_to('<button type="button">Buy</button>'.html_safe, buy_listing_path(listing.id)) %></td>
+                        <th class="table_left-align">Seller</th>
+                        <th>Condition</th>
+                        <th>Price</th>
+                        <th></th>
                     </tr>
-                <% } %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <% @listings.each { |listing| %>
+                        <tr>
+                            <td class="table_left-align"><%= @users.find(listing.user_id).email %></td>
+                            <td><%= listing.condition %></td>
+                            <td><%= number_to_currency(listing.price / 100.0) %></td>
+                            <td><%= link_to('<button type="button">Buy</button>'.html_safe, buy_listing_path(listing.id)) %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="flex-col">
