@@ -1,6 +1,11 @@
 #show {
+    margin-left:auto;
+    margin-right: auto;
+    max-width: 900px;
+
     table {
         border-collapse: collapse;
+        margin-top: 30px;
     }
 
     th {
@@ -22,9 +27,7 @@
         text-align: left;
     }
 
-
-
-    button {
+    button, .button {
         background-image: linear-gradient(#EEE, #DDD);
         border: 1px solid #D5D5D5;
         border-radius: 3px;
@@ -35,7 +38,7 @@
         vertical-align: middle;
     }
 
-    button:hover {
+    button:hover, .button:hover {
         background-image: linear-gradient(#fff634, #cec72a);
     }
 
@@ -45,7 +48,45 @@
         align-items: center;
     }
 
-    .table {
-        margin-top: 30px;
+    .flex-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+    }
+
+    label {
+        display: inline-block;
+        margin-right: 30px;
+        text-align: left;
+        width: 100px;
+    }
+
+    input {
+        background-color: white;
+        border: 1px solid #D5D5D5;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .button {
+        height: 40px;
+        width: 125px;
+    }
+
+    .delete-button {
+        background-image: linear-gradient(#EEE, #DDD);
+        border: 1px solid #D5D5D5;
+        border-radius: 3px;
+        color: black;
+        font-weight: bold;
+        height: 40px;
+        width: 100px;
+    }
+
+    .delete-button:hover{
+        color: white;
+        background-image: linear-gradient(#e30e0e, #820808);
     }
 }
