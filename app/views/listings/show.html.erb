@@ -31,7 +31,7 @@
     </div>
 
     <div class="flex-col">
-        <% if @listing.user_id == current_user.id %>
+        <% if current_user && @listing.user_id == current_user.id %>
             <p><%= "Do you want to edit this listing?" %></p>
             <%= form_with(model: @listing, local: true) do |form| %>
                 <div>

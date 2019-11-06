@@ -1,10 +1,9 @@
 class ListingsController < ApplicationController
-    
+    before_action :authenticate_user!, except: [:index, :show]
+
     #called when user clicks "Browse" in the top bar
     #sends data to listings/index.html.erb
     def index
-        @listing
-
         #create the array of ids for listings still available (i.e. not sold yet)
         listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
 
@@ -57,7 +56,6 @@ class ListingsController < ApplicationController
     
         @session_id = session.id
     end
-
 
     #called when user clicks "Search" on listings/new.html.erb
     #sends data to listings/new.html.erb
