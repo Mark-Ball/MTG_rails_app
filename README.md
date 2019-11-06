@@ -222,13 +222,15 @@ One of the most important functions of Devise is to make the 'current_user' vari
 
 #### Stripe
 
-Stripe is the payment system used in MTG-marketplace.
+Stripe is the payment system used in MTG-marketplace. When users confirm they want to purchase a listing they are redirected to Stripe to enter their credit card details. Once successful they are redirected back to the application, to a page specially set up to congratulate them on their purchase.
+
+The payment processing also integrates webhooks, meaning that the purchase will only be entered into the purchase table in the database once confirmation has been received from Stripe that the checkout was successful.
 
 ## Tech stack
 
 The following were used in the creation of MTG-marketplace:
 - Ruby
-    - Gems: Down, Devise, Stripe, ultrahook
+    - Gems: Down, Devise, Stripe, ultrahook, HTTParty
 - Rails
 - HTML
 - CSS
