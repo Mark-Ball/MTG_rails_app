@@ -232,7 +232,7 @@ The payment processing also integrates webhooks, meaning that the purchase will 
 
 Ultrahook is a an application which allows our application to receive a HTTP requests made over the public internet. This is necessary because in development we test our application on localhost:3000, which is not an accessible endpoint from the wider internet. Ultrahook provides a solution, which allows us to set up an endpoint which transmits any HTTP requests to our ultrahook address to our localhost:3000.
 
-This is important for development environments where we will be developing from behind a firewall, not from a publically accessable endpoint.
+This is important for development environments where we will be developing from behind a firewall, not from a publically accessable endpoint. Once the application is deployed using cloud hosting, ultrahook will no longer be used.
 
 ## Tech stack
 

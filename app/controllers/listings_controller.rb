@@ -6,7 +6,7 @@ class ListingsController < ApplicationController
     def index
         @cards = Card.all
 
-        #create the array of ids for listings still available (i.e. not sold yet)
+        #create the array of ids for listings still available (calculated as all listings minus sold listings)
         listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
 
         search_name = "%#{params[:name]}%"
@@ -82,21 +82,19 @@ class ListingsController < ApplicationController
     #called with "Create listing" button on /listings/new/confirm => confirm.html.erb
     #enters the new listing into the database
     def create
-        current_user.listings.create(
-            condition: params[:listing][:condition],
-            price: params[:listing][:price],
-            card_id: params[:listing][:card_id]
-        )
+        whitelisted_params = params.require(:listing).permit(:condition, :price, :card_id)
+        current_user.listings.create(whitelisted_params)
         redirect_to(listings_path)
     end
 
     #called when "Update listing" button is pressed on /listings/:id => listings/show.html.erb
     #updated record for the relevant listing
     def update
-        Listing.find(params[:id]).update(
-            condition: params[:listing][:condition],
-            price: params[:listing][:price]
-        )
+        whitelisted_params = params.require(:listing).permit(:condition, :price)
+        Listing.find(params[:id]).update(whitelisted_params)
+        #     condition: params[:listing][:condition],
+        #     price: params[:listing][:price]
+        # )
         redirect_to(listing_path(params[:id]))
     end
 
@@ -105,5 +103,11 @@ class ListingsController < ApplicationController
     def delete
         Listing.find(params[:id]).destroy
         redirect_to(listings_path)
+    end
+
+    private
+    #not in use yet
+    def set_listing
+        @listing = Listing.find(params[:id])
     end
 end
