@@ -9,11 +9,11 @@ class ListingsController < ApplicationController
         #create the array of ids for listings still available (calculated as all listings minus sold listings)
         listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
 
-        search_name = "%#{params[:name]}%"
+        search = "%#{params[:search]}%"
 
         #send the view only the available listings and only unique cards to render
-        if params[:name]
-            @listings = Listing.where(card_id: Card.where("name LIKE ?", search_name).ids).uniq { |l| l.card_id }
+        if params[:search]
+            @listings = Listing.where(card_id: Card.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
         else #show all available
             @listings = Listing.where(id: listings_available).uniq { |l| l.card_id }
         end

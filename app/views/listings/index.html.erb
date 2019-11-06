@@ -1,15 +1,16 @@
 <div id="index">
     <%= render "partials/top_bar" %>
 
-    <div class="filter">
-        <h3>Filters</h3>
+    <h3>Search</h3>
 
+    <div class="filter">
         <%= form_with(url: listings_path, method: "get", local: true) do |form| %>
-            <div>
-                <%= form.label(:name) %>
-                <%= form.text_field(:name) %>
+            <div class="filter">
+                <div>
+                    <%= form.text_field(:search) %>
+                </div>
+                <%= form.submit "Search", class: "button" %>
             </div>
-                <%= form.submit("Filter") %>
         <% end %>
     </div>
 

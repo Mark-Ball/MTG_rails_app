@@ -1,27 +1,52 @@
 #index {
-    display: flex;
-    flex-flow: column nowrap;
+    // display: flex;
+    // flex-flow: column nowrap;
 
-    max-width: 100%;
+    // max-width: 100%;
+
+    h3 {
+        text-align: center;
+    }
 
     .filter {
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        height: 100%;
+        justify-content: center;
+
+        input {
+            margin-left: 20px;
+        }
     }
 
     .cards-container {
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
-        align-content: left;
     }
 
     .card {
-        margin-bottom: 30px;
+        margin: 20px;
     }
 
+    input {
+        background-color: white;
+        border: 1px solid #D5D5D5;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
 
+    .button {
+        background-image: linear-gradient(#EEE, #DDD);
+        border: 1px solid #D5D5D5;
+        border-radius: 3px;
+        color: black;
+        font-weight: bold;
+        height: 40px;
+        width: 100px;
+        vertical-align: middle;
+    }
 
+    .button:hover {
+        background-image: linear-gradient(#fff634, #cec72a);
+    }
 }
