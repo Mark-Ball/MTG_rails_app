@@ -3,16 +3,19 @@
 
   <h1>You are about to purchase the following card</h1>
 
-  <div class="flex-col">
+  <div class="flex-container">
   
     <%= image_tag @card_image %>
-    <p><%= number_to_currency(@listing.price / 100.0) %></p>
-    
-    <form method="POST" action="<%= buy_listing_path %>">
-        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-        <input type="hidden" name="id" value="<%= @listing.id %>" />
-        <input data-stripe="payment" type=submit value="Confirm" class="button" />
-    </form>
+
+    <div class="flex-col">
+      <p><%= number_to_currency(@listing.price / 100.0) %></p>
+      
+      <form method="POST" action="<%= buy_listing_path %>">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+          <input type="hidden" name="id" value="<%= @listing.id %>" />
+          <input data-stripe="payment" type=submit value="Confirm" class="button" />
+      </form>
+    </div>
   </div>
 </div>
 
