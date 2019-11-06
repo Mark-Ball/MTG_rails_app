@@ -4,19 +4,19 @@ class ListingsController < ApplicationController
     #called when user clicks "Browse" in the top bar
     #sends data to listings/index.html.erb
     def index
+        @cards = Card.all
+
         #create the array of ids for listings still available (i.e. not sold yet)
         listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
 
-        #send the view only the available listings and only unique cards to render
-        @listings = Listing.where(id: listings_available).uniq { |l| l.card_id }
-        @cards = Card.all
+        search_name = "%#{params[:name]}%"
 
-        #variables for search functionality
-        @card_types = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Sorcery']
-        @rarities = Card.distinct.pluck(:rarity).sort
-        # [['Mythic', 1], ['Rare', 2], ['Uncommon', 3], ['Common', 4]]
-        @conditions = ['Any', 'Mint', 'Near mint', 'Excellent', 'Good', 'Lightly played', 'Played', 'Poor']
-        @sets = Card.distinct.pluck(:set).sort
+        #send the view only the available listings and only unique cards to render
+        if params[:name]
+            @listings = Listing.where(card_id: Card.where("name LIKE ?", search_name).ids).uniq { |l| l.card_id }
+        else #show all available
+            @listings = Listing.where(id: listings_available).uniq { |l| l.card_id }
+        end
     end
 
     #called when user clicks a card on listings/index.html.erb
