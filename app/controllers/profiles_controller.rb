@@ -11,31 +11,18 @@ class ProfilesController < ApplicationController
     end
 
     def update
-        current_user.update(
-            name: params[:user][:name],
-            alias: params[:user][:alias],
-            email: params[:user][:email],
-            image: params[:user][:image]
-        )
+        whitelisted_user_params = params.require(:user).permit(:name, :alias, :email)
+        whitelisted_address_params = params.require(:address).permit(:address, :suburb, :city, :country, :postcode)
+        whitelisted_image = params.require(:user).permit(:image)
 
-        # current_user.image.attach(io: params[:profile][:image], filename: "#{current_user.email}_#{current_user.name}.jpg")
+        current_user.update(whitelisted_user_params)
+
+        current_user.update(image: params[:user][:image]) if params[:user][:image]
 
         if current_user.address.nil?
-            current.user.create_address(
-                address: params[:address][:address],
-                suburb: params[:address][:suburb],
-                city: params[:address][:city],
-                country: params[:address][:country],
-                postcode: params[:address][:postcode]
-            )
+            current.user.create_address(whitelisted_address_params)
         else
-            current_user.address.update(
-                address: params[:address][:address],
-                suburb: params[:address][:suburb],
-                city: params[:address][:city],
-                country: params[:address][:country],
-                postcode: params[:address][:postcode] 
-            )
+            current_user.address.update(whitelisted_address_params)
         end
         redirect_to(profile_path)
     end
