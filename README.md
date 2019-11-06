@@ -189,7 +189,9 @@ The relationships between users, cards, and images are:
 MTG-marketplace used four third-party services:
 - magicthegathering.io
 - Down gem
+- HTTParty gem
 - Stripe
+- ultrahook and ultrahook gem
 - Devise gem
 
 #### magicthegathering.io
@@ -225,6 +227,12 @@ One of the most important functions of Devise is to make the 'current_user' vari
 Stripe is the payment system used in MTG-marketplace. When users confirm they want to purchase a listing they are redirected to Stripe to enter their credit card details. Once successful they are redirected back to the application, to a page specially set up to congratulate them on their purchase.
 
 The payment processing also integrates webhooks, meaning that the purchase will only be entered into the purchase table in the database once confirmation has been received from Stripe that the checkout was successful.
+
+#### Ultrahook
+
+Ultrahook is a an application which allows our application to receive a HTTP requests made over the public internet. This is necessary because in development we test our application on localhost:3000, which is not an accessible endpoint from the wider internet. Ultrahook provides a solution, which allows us to set up an endpoint which transmits any HTTP requests to our ultrahook address to our localhost:3000.
+
+This is important for development environments where we will be developing from behind a firewall, not from a publically accessable endpoint.
 
 ## Tech stack
 
