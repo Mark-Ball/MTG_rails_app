@@ -9,6 +9,7 @@
         <div class="flex-col">
             <form method="POST" action="<%= listings_path %>">
                 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+                <p><%= "Please fill in the details for your listing" if @empty_search %></p>
                 <div>
                     <label for="condition">Condition</label>
                     <input type="text" name="listing[condition]" id="condition" />

@@ -59,7 +59,7 @@ class ListingsController < ApplicationController
 
     #called when user clicks "Search" on listings/new.html.erb
     #sends data to listings/new.html.erb
-    def new 
+    def new
         @card = Card.new
 
         if params[:card].nil?
@@ -75,16 +75,22 @@ class ListingsController < ApplicationController
 
     #called when user clicks "Yes" button on listings/new => new.html.erb
     #sends data to listings/confirm.html.erb
-    def confirm_new 
+    def confirm_new
         @card = Card.find(params[:card][:id])
+        @empty_search = params[:empty_search]
     end
 
     #called with "Create listing" button on /listings/new/confirm => confirm.html.erb
     #enters the new listing into the database
     def create
-        whitelisted_params = params.require(:listing).permit(:condition, :price, :card_id)
-        current_user.listings.create(whitelisted_params)
-        redirect_to(listings_path)
+        #if the user does not enter the condition or price fields, reload the page
+        if params[:listing][:condition].empty? || params[:listing][:price].empty?
+            redirect_to confirm_new_listing_path(card: {id: params[:listing][:card_id]}, empty_search: true)
+        else
+            whitelisted_params = params.require(:listing).permit(:condition, :price, :card_id)
+            current_user.listings.create(whitelisted_params)
+            redirect_to(listings_path)
+        end
     end
 
     #called when "Update listing" button is pressed on /listings/:id => listings/show.html.erb
