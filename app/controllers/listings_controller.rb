@@ -4,19 +4,35 @@ class ListingsController < ApplicationController
     #called when user clicks "Browse" in the top bar
     #sends data to listings/index.html.erb
     def index
-        @cards = Card.all
+        # @cards = Card.all
 
-        #create the array of ids for listings still available (calculated as all listings minus sold listings)
-        listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
+        # #create the array of ids for listings still available (calculated as all listings minus sold listings)
+        # listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
+
+        # search = "%#{params[:search]}%"
+
+        # #send the view only the available listings and only unique cards to render
+        # if params[:search]
+        #     @listings = Listing.where(card_id: Card.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
+        # else #show all available
+        #     @listings = Listing.where(id: listings_available).uniq { |l| l.card_id }
+        # end
+
+        #alternative code
+        @cards = Card.all
+        listings = Listing.all
+        purchases = Purchase.all.map { |i| i.listing_id }
+
+        listings_available = listings.ids - purchases
 
         search = "%#{params[:search]}%"
 
-        #send the view only the available listings and only unique cards to render
         if params[:search]
-            @listings = Listing.where(card_id: Card.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
-        else #show all available
-            @listings = Listing.where(id: listings_available).uniq { |l| l.card_id }
+            @listings = listings.where(card_id: @cards.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
+        else
+            @listings = listings.where(id: listings_available).uniq { |l| l.card_id }
         end
+
     end
 
     #called when user clicks a card on listings/index.html.erb
