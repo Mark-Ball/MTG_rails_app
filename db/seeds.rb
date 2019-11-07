@@ -52,20 +52,20 @@
 # end
 
 #downloading images
-# i = 103
-# while i < 508 #this range represents all Tenth Edition cards
-#     card = Card.find(i)
-#     if card.imageUrl
-#         img = Down.download(card.imageUrl)
-#         card.image.attach(io: img, filename: "#{card.name}_#{card.set}.jpg")
-#         puts "Card #{i} downloaded"
-#     end
-#     i += 1
-# end
+i = 102
+while i < 609 #this range represents all Tenth Edition cards
+    card = Card.find_by_id(i)
+    if card && card.imageUrl
+        img = Down.download(card.imageUrl)
+        card.image.attach(io: img, filename: "#{card.name}_#{card.set}.jpg")
+        puts "Card #{i} downloaded"
+    end
+    i += 1
+end
 
 #seed the listings
-card_ids = [131, 182, 158, 390, 434, 454]
-for id in card_ids
-    price = rand(100..500)
-    User.first.listings.create(condition: "mint", price: price, card_id: id)
-end
+# card_ids = [131, 182, 158, 390, 434, 454]
+# for id in card_ids
+#     price = rand(100..500)
+#     User.first.listings.create(condition: "mint", price: price, card_id: id)
+# end

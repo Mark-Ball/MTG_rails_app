@@ -14,6 +14,8 @@
                         <th>Condition</th>
                         <th>Price</th>
                         <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +25,8 @@
                             <td><%= listing.condition %></td>
                             <td><%= number_to_currency(listing.price / 100.0) %></td>
                             <td><%= link_to('<button type="button">Buy</button>'.html_safe, buy_listing_path(listing.id)) %></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     <% } %>
                 </tbody>
