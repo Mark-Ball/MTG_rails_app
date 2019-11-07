@@ -1,10 +1,10 @@
 <div id="show">
     <%= render "partials/top_bar" %>
 
-    <h1><%= @card.name %></h1>
+    <h1><%= @listing.card.name %></h1>
 
     <div class="flex-container">
-        <%= image_tag @card.image if @card.image.attached? %>
+        <%= image_tag @listing.card.image if @listing.card.image.attached? %>
 
         <div>
             <table>
@@ -19,9 +19,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @listings.each { |listing| %>
+                    <% @listing.card.listings.each { |listing| %>
                         <tr>
-                            <td class="table_left-align"><%= @users.find(listing.user_id).email %></td>
+                            <td class="table_left-align"><%= listing.user.email %></td>
                             <td><%= listing.condition %></td>
                             <td><%= number_to_currency(listing.price / 100.0) %></td>
                             <td>

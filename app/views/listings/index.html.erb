@@ -16,10 +16,9 @@
 
     <div class="cards-container">
         <% @listings.each_with_index { |listing, index| %>
-            <% img = @cards.find(listing.card_id).image %>
             <%= link_to listing_path(@listings[index].id), action: 'go' do %>
                 <div class="card">
-                    <%= image_tag img if img.attached? %>
+                    <%= image_tag listing.card.image if listing.card.image.attached? %>
                 </div>
             <% end %>
         <% } %>

@@ -4,23 +4,10 @@ class ListingsController < ApplicationController
     #called when user clicks "Browse" in the top bar
     #sends data to listings/index.html.erb
     def index
-        # @cards = Card.all
-
-        # #create the array of ids for listings still available (calculated as all listings minus sold listings)
-        # listings_available = Listing.all.ids - Purchase.all.map { |i| i.listing_id }
-
-        # search = "%#{params[:search]}%"
-
-        # #send the view only the available listings and only unique cards to render
-        # if params[:search]
-        #     @listings = Listing.where(card_id: Card.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
-        # else #show all available
-        #     @listings = Listing.where(id: listings_available).uniq { |l| l.card_id }
-        # end
-
-        #alternative code
         @cards = Card.all
-        listings = Listing.all
+
+        #eager loading the images to reduce number of queries
+        listings = Listing.includes(card: {image_attachment: :blob}).all
         purchases = Purchase.all.map { |i| i.listing_id }
 
         listings_available = listings.ids - purchases
@@ -38,10 +25,7 @@ class ListingsController < ApplicationController
     #called when user clicks a card on listings/index.html.erb
     #sends data to listings/show.html.erb
     def show
-        @users = User.all
         @listing = Listing.find(params[:id])
-        @listings = Listing.where(card_id: @listing.card_id)
-        @card = Card.find(@listing.card_id)
     end
 
     #called when user clicks "Buy" on the show page
@@ -117,12 +101,15 @@ class ListingsController < ApplicationController
     #called when "Update listing" button is pressed on /listings/:id => listings/show.html.erb
     #updated record for the relevant listing
     def update
-        whitelisted_params = params.require(:listing).permit(:condition, :price)
-        Listing.find(params[:id]).update(whitelisted_params)
-        #     condition: params[:listing][:condition],
-        #     price: params[:listing][:price]
-        # )
-        redirect_to(listing_path(params[:id]))
+        listing = Listing.find(params[:id])
+        
+        if current_user.id == listing.user.id
+            whitelisted_params = params.require(:listing).permit(:condition, :price)
+            listing.update(whitelisted_params)
+            redirect_to(listing_path(params[:id]))
+        else
+            redirect_to edit_listing_path(id: params[:id], unauthorised: true)
+        end
     end
 
     #called when "Delete" button is pressed on /listings/:id => listings/show.html.erb
