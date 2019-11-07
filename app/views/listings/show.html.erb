@@ -24,9 +24,23 @@
                             <td class="table_left-align"><%= @users.find(listing.user_id).email %></td>
                             <td><%= listing.condition %></td>
                             <td><%= number_to_currency(listing.price / 100.0) %></td>
-                            <td><%= link_to('<button type="button">Buy</button>'.html_safe, buy_listing_path(listing.id)) %></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <% if listing.user_id != current_user.id %>
+                                    <%= link_to('<button type="button">Buy</button>'.html_safe, buy_listing_path(listing.id)) %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <% if current_user && listing.user_id == current_user.id %>
+                                    <%= link_to('<button type="button">Edit</button>'.html_safe, edit_listing_path(listing.id)) %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <% if current_user && listing.user_id == current_user.id %>
+                                    <%= form_with(url: listing_path, method: "delete") do %>
+                                        <%= submit_tag "Delete", class: "delete-button"  %>
+                                    <% end %>
+                                <% end %>
+                            </td>
                         </tr>
                     <% } %>
                 </tbody>

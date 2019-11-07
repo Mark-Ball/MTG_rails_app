@@ -93,6 +93,11 @@ class ListingsController < ApplicationController
         end
     end
 
+    def edit
+        @listing = Listing.find(params[:id])
+        @card_image = Card.find(@listing.card_id).image
+    end
+
     #called when "Update listing" button is pressed on /listings/:id => listings/show.html.erb
     #updated record for the relevant listing
     def update

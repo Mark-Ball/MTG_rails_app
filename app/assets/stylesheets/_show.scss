@@ -33,7 +33,7 @@
         text-align: left;
     }
 
-    button, .button {
+    button {
         background-image: linear-gradient(#EEE, #DDD);
         border: 1px solid #D5D5D5;
         border-radius: 3px;
@@ -44,7 +44,7 @@
         vertical-align: middle;
     }
 
-    button:hover, .button:hover {
+    button:hover {
         background-image: linear-gradient(#fff634, #cec72a);
     }
 
@@ -70,18 +70,13 @@
         margin-bottom: 20px;
     }
 
-    .button {
-        height: 40px;
-        width: 125px;
-    }
-
     .delete-button {
         background-image: linear-gradient(#EEE, #DDD);
         border: 1px solid #D5D5D5;
         border-radius: 3px;
         color: black;
         font-weight: bold;
-        height: 40px;
+        height: 30px;
         width: 100px;
     }
 

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/listings/new", to: "listings#new", as: "new_listing"
   get "/listings/new/confirm", to: "listings#confirm_new", as: "confirm_new_listing"
   get "/listings/:id/buy", to: "listings#buy", as: "buy_listing"
+  get "/listings/:id/edit", to: "listings#edit", as: "edit_listing"
   get "/listings/:id", to: "listings#show", as: "listing"
   put "/listings/:id", to: "listings#update"
   patch "/listings/:id", to: "listings#update"
