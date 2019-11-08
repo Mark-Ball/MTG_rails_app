@@ -41,8 +41,8 @@ class ListingsController < ApplicationController
     #sends data to listings/buy.html.erb. 
     def buy 
         @listing = Listing.find(params[:id])
-        @card_image = Card.find(@listing.card_id).image
-        card_name = Card.find(@listing.card_id).name
+        @card_image = @listing.card.image
+        card_name = @listing.card.name
 
         session = Stripe::Checkout::Session.create(
             payment_method_types: ['card'],
@@ -101,6 +101,7 @@ class ListingsController < ApplicationController
     def edit
         @listing = Listing.find(params[:id])
         @card_image = Card.find(@listing.card_id).image
+        #@listing.card.image
 
         if current_user.id != @listing.user.id
             redirect_to listings_path
