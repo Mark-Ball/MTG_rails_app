@@ -3,6 +3,8 @@
 
     <h1>Edit listing</h1>
 
+    <h2><%= "You do not have authorisation to edit this listing" if params[:unauthorised] %></h2>
+
     <div class="flex-container">
         <%= image_tag @card_image %>
 
