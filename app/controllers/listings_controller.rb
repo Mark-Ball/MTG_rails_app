@@ -50,6 +50,7 @@ class ListingsController < ApplicationController
             line_items: [{
                 name: card_name,
                 amount: @listing.price,
+                images: [@listing.imageUrl],
                 currency: 'aud',
                 quantity: 1,
             }],
@@ -100,8 +101,14 @@ class ListingsController < ApplicationController
 
     def edit
         @listing = Listing.find(params[:id])
-        @card_image = Card.find(@listing.card_id).image
-        #@listing.card.image
+
+        #do not allow access to the edit page of a card that is already purchased
+        #instead redirect to listings
+        if @listing.purchase
+            redirect_to listings_path and return
+        end
+
+        @card_image = @listing.card.image
 
         if current_user.id != @listing.user.id
             redirect_to listings_path
