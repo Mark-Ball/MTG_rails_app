@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% @listing.card.listings.each { |listing| %>
+                    <% @listings.each { |listing| %>
                         <tr>
                             <td class="table_left-align"><%= listing.user.email %></td>
                             <td><%= listing.condition %></td>

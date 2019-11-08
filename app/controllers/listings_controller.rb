@@ -26,6 +26,15 @@ class ListingsController < ApplicationController
     #sends data to listings/show.html.erb
     def show
         @listing = Listing.find(params[:id])
+        #get all ids of listings of this card
+        listings_ids = @listing.card.listings.ids
+        #get the listing ids of sold listings
+        purchases_ids = Purchase.all.map { |i| i.listing_id }
+        #calculate the list of ids for available listings
+        listings_available_ids = listings_ids - purchases_ids
+        #get the list of records for available listing
+        @listings = Listing.where(id: listings_available_ids)
+        # @listings = Listing.find(params[:id]).card.listings.map { |i| i.purchase }
     end
 
     #called when user clicks "Buy" on the show page
