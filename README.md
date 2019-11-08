@@ -2,10 +2,10 @@
 
 Github: https://github.com/Mark-Ball/MTG_rails_app
 
-Website: TBC
+Website: https://mtg-marketplace.herokuapp.com/
 
 # Introduction
-Magic: The Gathering (hereafter 'Magic') is a strategy game played with specially-printed cards. An example of a front and back of a Magic card is presented below.
+Magic: The Gathering ('Magic') is a strategy game played with specially-printed cards. An example of a front and back of a Magic card is presented below.
 
 ![magic_cardback](/docs/mtg_example.jpg)
 
