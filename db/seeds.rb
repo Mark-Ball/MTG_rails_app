@@ -54,8 +54,8 @@
 # Card.where(imageURL: nil).destroy_all
 
 #downloading images
-i = 1
-while i < 508 #this range represents all Tenth Edition cards
+i = 15694
+while i < 16151 #this range represents all Tenth Edition cards
     card = Card.find_by_id(i)
     if card && card.imageUrl
         img = Down.download(card.imageUrl)
