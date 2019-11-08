@@ -21,7 +21,7 @@ class ProfilesController < ApplicationController
         current_user.update(image: params[:user][:image]) if params[:user][:image]
 
         if current_user.address.nil?
-            current.user.create_address(whitelisted_address_params)
+            current_user.create_address(whitelisted_address_params)
         else
             current_user.address.update(whitelisted_address_params)
         end
