@@ -62,14 +62,10 @@ class ListingsController < ApplicationController
     def new
         @card = Card.new
 
-        if params[:card].nil?
-            @cards = nil
+        if params[:card]
+            @cards = Card.where(name: params[:card][:name]).where(set: params[:card][:set])
         else
-            if params[:card][:set].empty? 
-                @cards = Card.where(name: params[:card][:name])
-            else
-                @cards = Card.where(name: params[:card][:name]).where(set: params[:card][:set])
-            end
+            @cards = nil
         end
     end
 
@@ -96,6 +92,10 @@ class ListingsController < ApplicationController
     def edit
         @listing = Listing.find(params[:id])
         @card_image = Card.find(@listing.card_id).image
+
+        if current_user.id != @listing.user.id
+            redirect_to listings_path
+        end
     end
 
     #called when "Update listing" button is pressed on /listings/:id => listings/show.html.erb
@@ -103,13 +103,9 @@ class ListingsController < ApplicationController
     def update
         listing = Listing.find(params[:id])
         
-        if current_user.id == listing.user.id
-            whitelisted_params = params.require(:listing).permit(:condition, :price)
-            listing.update(whitelisted_params)
-            redirect_to(listing_path(params[:id]))
-        else
-            redirect_to edit_listing_path(id: params[:id], unauthorised: true)
-        end
+        whitelisted_params = params.require(:listing).permit(:condition, :price)
+        listing.update(whitelisted_params)
+        redirect_to(listing_path(params[:id]))
     end
 
     #called when "Delete" button is pressed on /listings/:id => listings/show.html.erb

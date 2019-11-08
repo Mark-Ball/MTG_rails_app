@@ -6,50 +6,49 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# card = JSON.parse(response.body)["cards"][0]
+#download cards
+i = 1
+while true
+    response = HTTParty.get("https://api.magicthegathering.io/v1/cards?page=#{i}")
 
-# i = 1
-# while true
-#     response = HTTParty.get("https://api.magicthegathering.io/v1/cards?page=#{i}")
+    cards = JSON.parse(response.body)["cards"]
+    break if cards.length == 0
 
-#     cards = JSON.parse(response.body)["cards"]
-#     break if cards.length == 0
+    puts "retrieving page #{i}"
 
-#     puts "retrieving page #{i}"
-
-#     for card in cards
-#         Card.create(
-#             name: card["name"],
-#             names: card["names"],
-#             manacost: card["manaCost"],
-#             cmc: card["cmc"],
-#             colors: card["colors"],
-#             colorIdentity: card["colorIdentity"],
-#             card_type: card["type"],
-#             supertypes: card["supertypes"],
-#             types: card["types"],
-#             subtypes: card["subtypes"],
-#             rarity: card["rarity"],
-#             set: card["setName"],
-#             text: card["text"],
-#             artist: card["artist"],
-#             number: card["number"],
-#             power: card["power"],
-#             toughness: card["toughness"],
-#             layout: card["layout"],
-#             multiverseid: card["multiverseid"],
-#             imageUrl: card["imageUrl"],
-#             rulings: card["rulings"],
-#             foreignNames: card["foreignNames"],
-#             printings: card["printings"],
-#             originalText: card["originalText"],
-#             originalType: card["originalType"],
-#             magic_card_id: card["id"]
-#         )
-#     end
-#     puts "finished page #{i}"
-#     i += 1
-# end
+    for card in cards
+        Card.create(
+            name: card["name"],
+            names: card["names"],
+            manacost: card["manaCost"],
+            cmc: card["cmc"],
+            colors: card["colors"],
+            colorIdentity: card["colorIdentity"],
+            card_type: card["type"],
+            supertypes: card["supertypes"],
+            types: card["types"],
+            subtypes: card["subtypes"],
+            rarity: card["rarity"],
+            set: card["setName"],
+            text: card["text"],
+            artist: card["artist"],
+            number: card["number"],
+            power: card["power"],
+            toughness: card["toughness"],
+            layout: card["layout"],
+            multiverseid: card["multiverseid"],
+            imageUrl: card["imageUrl"],
+            rulings: card["rulings"],
+            foreignNames: card["foreignNames"],
+            printings: card["printings"],
+            originalText: card["originalText"],
+            originalType: card["originalType"],
+            magic_card_id: card["id"]
+        )
+    end
+    puts "finished page #{i}"
+    i += 1
+end
 
 #downloading images
 i = 102
@@ -64,6 +63,7 @@ while i < 609 #this range represents all Tenth Edition cards
 end
 
 #seed the listings
+#must create users manually first
 # card_ids = [131, 182, 158, 390, 434, 454]
 # for id in card_ids
 #     price = rand(100..500)
