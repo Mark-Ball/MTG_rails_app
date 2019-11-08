@@ -50,7 +50,7 @@ class ListingsController < ApplicationController
             line_items: [{
                 name: card_name,
                 amount: @listing.price,
-                images: [@listing.imageUrl],
+                images: [@listing.card.imageUrl],
                 currency: 'aud',
                 quantity: 1,
             }],
