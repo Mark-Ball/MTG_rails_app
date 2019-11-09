@@ -7,8 +7,10 @@ class ListingsController < ApplicationController
          if params[:search]
             @cards = Card.all
 
-            #eager loading the images to reduce number of queries
+            #eager loading the cards associated with the listings
+            #then nested eager load the images associated with those cards
             listings = Listing.includes(card: {image_attachment: :blob}).all
+            
             #calling a custom method on the purchase model to return an array of purchase ids
             purchases = Purchase.purchase_ids
     
@@ -35,16 +37,21 @@ class ListingsController < ApplicationController
     #sends data to listings/show.html.erb
     def show
         #query to find listing to show
-        @listing = Listing.find(params[:id])
+        #eager load the card associated with the listing
+        #then nested eager load the listings associated with that card
+        @listing = Listing.includes(card: :listings).find(params[:id])
+
         #get all ids of listings of this card
         listings_ids = @listing.card.listings.ids
+
         #get the listing ids of sold listings
         purchases_ids = Purchase.purchase_ids
+
         #calculate the list of ids for available listings
         listings_available_ids = listings_ids - purchases_ids
+
         #get the list of records for available listing
         @listings = Listing.where(id: listings_available_ids)
-        # @listings = Listing.find(params[:id]).card.listings.map { |i| i.purchase }
     end
 
     #called when user clicks "Buy" on the show page
