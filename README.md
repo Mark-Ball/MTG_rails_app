@@ -8,6 +8,7 @@ Website: https://mtg-marketplace.herokuapp.com/
 Magic: The Gathering ('Magic') is a strategy game played with specially-printed cards. An example of a front and back of a Magic card is presented below.
 
 ![magic_cardback](/docs/mtg_example.jpg)
+<strong>Figure 1. Magic card front and back</strong>
 
 The game represents a battle between wizards called Planeswalkers in the in-game universe. A typical game involves playing creatures and spells to attack the opponent and the winner is the player who reduces their opponent's life to zero first.
 
@@ -89,6 +90,19 @@ Implication: the website should ask sellers only for the minimum information req
 <strong>13. As a seller, no one should be able to edit my listings but me, so I have control over what I am selling</strong>
 
 Implication: an authentication system must exist which restricts users from accessing or editing certain information.
+
+## Wireframes
+
+Wireframes were developed for three classes of device: desktop, iPad, and smartphone. These wireframes represent the planning at the outset of the project. During the project some features had to be cut and as a result the wireframes provided below do not necessarily correspond 100% with the final pages of the website.
+
+![wireframes_home](docs/wireframes_home.jpg)
+<strong>Figure 2. Wireframes for home page</strong>
+
+![wireframes_listings](docs/wireframes_listings.jpg)
+<strong>Figure 3. Wireframes for listings page</strong>
+
+![wireframes_show](docs/wireframes_show.jpg)
+<strong>Figure 4. Wireframes for show page</strong>
 
 ## The components of the application
 
