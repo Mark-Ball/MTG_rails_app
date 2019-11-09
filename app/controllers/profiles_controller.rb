@@ -30,14 +30,14 @@ class ProfilesController < ApplicationController
         #get an array of the user's listing ids
         listings_ids = current_user.listings.ids
         #get an array of the sold items listing ids
-        sold_ids = Purchase.all.map { |i| i.listing_id }
+        sold_ids = Purchase.purchase_ids
         #subtract them to get array of ids for items sold by this user which are still available
         still_available = listings_ids - sold_ids
         #passing only listings owned by the user which are still available to the view
         @my_listings = Listing.find(still_available)
         
         #creating the array of sold items
-        list_of_sales = Listing.where(user_id: current_user.id).ids & Purchase.all.map { |i| i.listing_id }
+        list_of_sales = Listing.where(user_id: current_user.id).ids & Purchase.purchase_ids
         @sold = Listing.find(list_of_sales)
 
         #creating the array of purchased items

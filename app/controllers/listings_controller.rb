@@ -4,21 +4,26 @@ class ListingsController < ApplicationController
     #called when user clicks "Browse" in the top bar
     #sends data to listings/index.html.erb
     def index
-        @cards = Card.all
+        # @cards = Card.all
 
-        #eager loading the images to reduce number of queries
-        listings = Listing.includes(card: {image_attachment: :blob}).all
-        purchases = Purchase.all.map { |i| i.listing_id }
+        #eager loading the purchases and cards with their attached images
+        listings = Listing.includes(:purchase, card: {image_attachment: :blob}).all
 
-        listings_available = listings.ids - purchases
+        #removing the listings which have been purchased from the available listings
+        listings_records = []
+        listings.each { |listing| 
+            listings_records.push(listing) unless listing.purchase
+        }
 
-        search = "%#{params[:search]}%"
+        @listings = listings_records.uniq { |l| l.card_id }
 
-        if params[:search]
-            @listings = listings.where(id: listings_available).where(card_id: @cards.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
-        else
-            @listings = listings.where(id: listings_available).uniq { |l| l.card_id }
-        end
+        # search = "%#{params[:search]}%"
+
+        # if params[:search]
+        #     @listings = listings_records.where(card_id: @cards.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
+        # else
+        #     @listings = listings_records.uniq { |l| l.card_id }
+        # end
 
         #old code
         # @cards = Card.all
@@ -42,11 +47,12 @@ class ListingsController < ApplicationController
     #called when user clicks a card on listings/index.html.erb
     #sends data to listings/show.html.erb
     def show
+        #query to find listing to show
         @listing = Listing.find(params[:id])
         #get all ids of listings of this card
         listings_ids = @listing.card.listings.ids
         #get the listing ids of sold listings
-        purchases_ids = Purchase.all.map { |i| i.listing_id }
+        purchases_ids = Purchase.purchase_ids
         #calculate the list of ids for available listings
         listings_available_ids = listings_ids - purchases_ids
         #get the list of records for available listing
@@ -56,9 +62,12 @@ class ListingsController < ApplicationController
 
     #called when user clicks "Buy" on the show page
     #sends data to listings/buy.html.erb. 
-    def buy 
+    def buy
+        #query to find listing to buy
         @listing = Listing.find(params[:id])
+        #query to find the image attached to the card attached to the listing
         @card_image = @listing.card.image
+        #query to find the name attached to the card attached to the listing
         card_name = @listing.card.name
 
         session = Stripe::Checkout::Session.create(
@@ -87,11 +96,14 @@ class ListingsController < ApplicationController
     #called when user clicks "Search" on listings/new.html.erb
     #sends data to listings/new.html.erb
     def new
+        #get an empty record of Card to send to the view
         @card = Card.new
 
         if params[:card]
+            #query to find a card with a specific name and set a per our search
             @cards = Card.where(name: params[:card][:name]).where(set: params[:card][:set])
         else
+            #if there is no search, there is nothing to render, send nil
             @cards = nil
         end
     end
@@ -99,6 +111,7 @@ class ListingsController < ApplicationController
     #called when user clicks "Yes" button on listings/new => new.html.erb
     #sends data to listings/confirm.html.erb
     def confirm_new
+        #query to find the correct record to send to the view
         @card = Card.find(params[:card][:id])
         @empty_search = params[:empty_search]
     end
@@ -117,6 +130,7 @@ class ListingsController < ApplicationController
     end
 
     def edit
+        #query to find the correct listing to send to the view
         @listing = Listing.find(params[:id])
 
         #do not allow access to the edit page of a card that is already purchased
@@ -135,6 +149,7 @@ class ListingsController < ApplicationController
     #called when "Update listing" button is pressed on /listings/:id => listings/show.html.erb
     #updated record for the relevant listing
     def update
+        #query to find the correct listing to update
         listing = Listing.find(params[:id])
         
         whitelisted_params = params.require(:listing).permit(:condition, :price)
@@ -145,6 +160,7 @@ class ListingsController < ApplicationController
     #called when "Delete" button is pressed on /listings/:id => listings/show.html.erb
     #deletes record for the relevant listing
     def delete
+        #query to find the correct listing to delete
         Listing.find(params[:id]).destroy
         redirect_to(listings_path)
     end

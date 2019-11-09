@@ -96,21 +96,27 @@ Implication: an authentication system must exist which restricts users from acce
 Wireframes were developed for three classes of device: desktop, iPad, and smartphone. These wireframes represent the planning at the outset of the project. During the project some features had to be cut and as a result the wireframes provided below do not necessarily correspond 100% with the final pages of the website.
 
 ![wireframes_home](docs/wireframes_home.jpg)
+
 <strong>Figure 2. Wireframes for home page</strong>
 
 ![wireframes_listings](docs/wireframes_listings.jpg)
+
 <strong>Figure 3. Wireframes for listings page</strong>
 
 ![wireframes_show](docs/wireframes_show.jpg)
+
 <strong>Figure 4. Wireframes for show page</strong>
 
 ![wireframes_buy](docs/wireframes_buy.jpg)
+
 <strong>Figure 5. Wireframes for buy page</strong>
 
 ![wireframes_profile](docs/wireframes_profile.jpg)
+
 <strong>Figure 6. Wireframes for profile page</strong>
 
 ![wireframes_my_listings](docs/wireframes_my_listings.jpg)
+
 <strong>Figure 7. Wireframes for my_listings page</strong>
 
 ## The components of the application
