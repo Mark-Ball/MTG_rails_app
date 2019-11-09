@@ -8,6 +8,7 @@ Website: https://mtg-marketplace.herokuapp.com/
 Magic: The Gathering ('Magic') is a strategy game played with specially-printed cards. An example of a front and back of a Magic card is presented below.
 
 ![magic_cardback](/docs/mtg_example.jpg)
+
 <strong>Figure 1. Magic card front and back</strong>
 
 The game represents a battle between wizards called Planeswalkers in the in-game universe. A typical game involves playing creatures and spells to attack the opponent and the winner is the player who reduces their opponent's life to zero first.
@@ -188,7 +189,9 @@ The relationship between users and listings is:
 - <strong>a listing belongs to a user
 - a user has many listings</strong>
 
-The cards table exists to hold all the information for all Magic cards in the most recent set, Throne of Eldraine. The scope was limited because of hosting limits on Heroku, which only permits 10,000 records in the free tier. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the Magic cards required have been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are are hosting the database ourselves.
+The cards table exists to hold all the information for all Magic cards in the most recent set, Throne of Eldraine. The scope was limited because of hosting limits on Heroku, which only permits 10,000 records in the free tier. 
+
+The reason this table was created was that magicthegathering.io, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the Magic cards required have been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are are hosting the database ourselves.
 
 The relationship between cards and listings is:
 - <strong>a listing belongs to a card
@@ -204,23 +207,39 @@ The relationship between purchases and listings is:
 - <strong>a purchase belongs to a listing
 - a listing has one purchase</strong>
 
-The last tables in the database structure are the active_storage_blobs and active_storage_attachments. The purpose of these tables is to store images which may be associated with either users or cards, meaning that the relationship is polymorphic. Active_storage_blobs contains the information on the image, such as its name and size in bytes. Active_storage_attachments contains the information that links these images to other tables. It does this by including a record attribute, which contains the name of the table the image is associated with. In our app, this will be either users or cards. Secondly it contains a record_id attribute which specifies which record the image is associated with. Record and record_id together identify the table and id which the image is associated with.
+The last tables in the database structure are the active_storage_blobs and active_storage_attachments. The purpose of these tables is to store images which may be associated with either users or cards, meaning that the relationship is polymorphic. Active_storage_blobs contains the information on the image, such as its name and size in bytes. Active_storage_attachments contains the information that links these images to other tables. It does this by including a record column, which contains the name of the table the image is associated with. In our app, this will be either users or cards. Secondly it contains a record_id column which specifies which record the image is associated with. Record and record_id together identify the table and id which the image is associated with.
 
 The relationships between users, cards, and images are:
-- <strong>a user has one image attached
-- a card has one image attached</strong>
+- <strong>a user has one attached image
+- a card has one attached image</strong>
 
 ## ERD
 
 Note: all tables have either a created_at, updated_at, or both columns which are automatically recorded. These have been excluded from the diagram.
 
 ![ERD](/docs/ERD.jpg)
-<strong>Figure X. MTG-marketplace ERD.</strong>
+
+<strong>Figure 8. MTG-marketplace ERD.</strong>
 
 ## Sitemap
 
 ![sitemap](docs/sitemap.jpg)
-<strong>Figure X. Trello board at end of Day 12</strong>
+
+<strong>Figure 9. MTG-marketplace sitemap</strong>
+
+## Features
+
+MTG-marketplace has the following features, which were developed based on the user stories above.
+
+- Users can buy and sell Magic cards
+- Anyone can view the listings, including the price and condition of individual listings
+- Anyone an search the listings for a specific card
+- The prices of all listings of the same card are displayed on the show page for that card
+- Users can edit or delete listings
+- A profile section allows users to save their information on the site
+- Security has been added to prevent users from editing or deleting listings which are not theirs, and accessing profiles which are not theirs
+- When listing a new card for sale, users can search a database of cards to fill their listing, rather than fill in all that information themselves
+- Secure payment through Stripe
 
 ## Target audience
 
