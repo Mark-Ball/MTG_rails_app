@@ -20,6 +20,23 @@ class ListingsController < ApplicationController
             @listings = listings.where(id: listings_available).uniq { |l| l.card_id }
         end
 
+        #old code
+        # @cards = Card.all
+
+        # #eager loading the images to reduce number of queries
+        # listings = Listing.includes(card: {image_attachment: :blob}).all
+        # purchases = Purchase.all.map { |i| i.listing_id }
+
+        # listings_available = listings.ids - purchases
+
+        # search = "%#{params[:search]}%"
+
+        # if params[:search]
+        #     @listings = listings.where(id: listings_available).where(card_id: @cards.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
+        # else
+        #     @listings = listings.where(id: listings_available).uniq { |l| l.card_id }
+        # end
+
     end
 
     #called when user clicks a card on listings/index.html.erb

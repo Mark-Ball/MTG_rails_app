@@ -201,29 +201,29 @@ Additionally, the site may be of interest to non-players who are interested in s
 
 ## Third-party services MTG-marketplace uses
 
-MTG-marketplace used four third-party services:
+The following third-party services were used either in the development or the running of MTG-marketplace:
 - magicthegathering.io
 - Down gem
 - HTTParty gem
 - Stripe and stripe gem
 - ultrahook and ultrahook gem
 - Devise gem
+- Amazon S3
+- PostgreSQL
 
 #### magicthegathering.io
 
 magicthegathering.io is an API developed by Andrew Backes, a software engineer from Milwaukee, Wisconsin. This API is developed as a hobby project by Backes, and is not affiliated with the organisation which owns Magic, Wizards of the Coast.
 
-This API was used in MTG-marketplace to download a database of all existing Magic cards into our own table in postgres. This was a significant time-saver because over 15,000 unique Magic cards exist and producing a database of all these cards for the purpose of this project would have been impossible.
+This API was used in MTG-marketplace to download a database of all existing Magic cards into our own table in postgres. This was a significant time-saver because over 45,000 unique Magic cards exist and producing a database of all these cards for the purpose of this project would have been impossible.
 
 It is important to have a database of all Magic cards for this projects so that users may more easily identify the cards they wish to buy or sell. The alternative would be for sellers to input the information about each Magic card they choose to list. However, the problem with this is that sellers may falsify information, leading buyers to believe that a card is more powerful than it really is, or simply mistakenly enter incorrect information.
 
 magicthegathering.io provides endpoints for groups of cards (this is the main endpoint which was used for MTG-marketplace), individual cards, all sets, individual sets, the content of booster packs, a list of card types (e.g. creatures, land, sorcery) and more. The API is rate-limited to 5,000 requests per hour. 
 
-Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers. In total approximately 47,000 records were downloaded.
+Having a pre-existing database of all Magic cards which is used to provide information about each card sold on MTG-marketplace solves this problem as well as leading to an easier experience for sellers.
 
 #### Down gem
-
-Github: https://github.com/janko/down
 
 Down is a Ruby gem used for downloading files. In MTG-marketplace, Down was used to download images of Magic cards. The url for each download was sourced from the cards downloaded from magicthegathering.io and a script was written in Ruby which downloaded the image from each url, then associated the image with the correct card via the ORM and saved the image in the database.
 
@@ -252,6 +252,22 @@ The payment processing also integrates webhooks, meaning that the purchase will 
 Ultrahook is a an application which allows our application to receive a HTTP requests made over the public internet. This is necessary because in development we test our application on localhost:3000, which is not an accessible endpoint from the wider internet. Ultrahook provides a solution, which allows us to set up an endpoint which transmits any HTTP requests to our ultrahook address to our localhost:3000.
 
 This is important for development environments where we will be developing from behind a firewall, not from a publically accessable endpoint. Once the application is deployed using cloud hosting, ultrahook will no longer be used.
+
+#### Amazon S3
+
+Amazon Simple Storage Service is a cloud-based storage service designed to make web-scale computing easier for developers. Amazon S3 works by creating a 'bucket' on Amazon web services which files can be uploaded to. MTG-marketplace uses S3 to host the majority of the images used on the site.
+
+S3 was used because the number of images that will need to be hosted for this web application is unknown for two reasons:
+- users may upload profile images
+- additional sets of Magic cards will require image hosting.
+
+This meant that local hosting was no longer the optimal solution due to the unpredictabilty of the amount of storage required.
+
+#### PostgreSQL
+
+PostgreSQL was the databased used for MTG-marketplace. PostgreSQL is a free, open-source, relational database. PostgreSQL can be easily integrated with a rails application when the application is created by typing.
+
+>rails new project_name -d postgresql
 
 ## Tech stack
 
