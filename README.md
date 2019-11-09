@@ -104,6 +104,15 @@ Wireframes were developed for three classes of device: desktop, iPad, and smartp
 ![wireframes_show](docs/wireframes_show.jpg)
 <strong>Figure 4. Wireframes for show page</strong>
 
+![wireframes_buy](docs/wireframes_buy.jpg)
+<strong>Figure 5. Wireframes for buy page</strong>
+
+![wireframes_profile](docs/wireframes_profile.jpg)
+<strong>Figure 6. Wireframes for profile page</strong>
+
+![wireframes_my_listings](docs/wireframes_my_listings.jpg)
+<strong>Figure 7. Wireframes for my_listings page</strong>
+
 ## The components of the application
 
 MTG-marketplace is written using Ruby on Rails and the PostgreSQL database. The application utilises the model-view-controller (MVC) model to create separation of concerns and applies a RESTful API to define which methods are available on which endpoints.
