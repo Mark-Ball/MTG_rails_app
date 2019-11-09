@@ -5,20 +5,19 @@ class ListingsController < ApplicationController
     #sends data to listings/index.html.erb
     def index
          if params[:search]
-            @cards = Card.all
-
             #eager loading the cards associated with the listings
             #then nested eager load the images associated with those cards
             listings = Listing.includes(card: {image_attachment: :blob}).all
             
-            #calling a custom method on the purchase model to return an array of purchase ids
+            #calling a custom method 'purchase_ids' on the purchase model to return an array of purchase ids
             purchases = Purchase.purchase_ids
     
             listings_available = listings.ids - purchases
     
             search = "%#{params[:search]}%"
             
-            @listings = listings.where(id: listings_available).where(card_id: @cards.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
+            #calling a custom method 'search' on Card called to find records matching the name input
+            @listings = listings.where(id: listings_available).where(card_id: Card.search(search).ids).uniq { |l| l.card_id }
         else
             #eager loading the purchases and cards with their attached images
             listings = Listing.includes(:purchase, card: {image_attachment: :blob}).all
@@ -125,7 +124,9 @@ class ListingsController < ApplicationController
 
     def edit
         #query to find the correct listing to send to the view
-        @listing = Listing.find(params[:id])
+        #eager loading the card associated with the listing
+        #then nested eager load the image associated with that card
+        @listing = Listing.includes(card: {image_attachment: :blob}).find(params[:id])
 
         #do not allow access to the edit page of a card that is already purchased
         #instead redirect to listings
