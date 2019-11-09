@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
         search = "%#{params[:search]}%"
 
         if params[:search]
-            @listings = listings.where(card_id: @cards.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
+            @listings = listings.where(id: listings_available).where(card_id: @cards.where("name LIKE ?", search).ids).uniq { |l| l.card_id }
         else
             @listings = listings.where(id: listings_available).uniq { |l| l.card_id }
         end

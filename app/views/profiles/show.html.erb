@@ -35,23 +35,23 @@
                 </tr>
                 <tr>   
                     <td>Address:</td>
-                    <td><%= @address.address if @address %></td>
+                    <td><%= @user.address.address if @user.address.address %></td>
                 </tr>
                 <tr>   
                     <td></td>
-                    <td><%= @address.suburb if @address %></td>
+                    <td><%= @user.address.suburb if @user.address.suburb %></td>
                 </tr>
                 <tr>   
                     <td></td>
-                    <td><%= @address.city if @address %></td>
+                    <td><%= @user.address.city if @user.address.city %></td>
                 </tr>
                 <tr>   
                     <td></td>
-                    <td><%= @address.country if @address %></td>
+                    <td><%= @user.address.country if @user.address.country %></td>
                 </tr>
                 <tr>   
                     <td></td>
-                    <td><%= @address.postcode if @address %></td>
+                    <td><%= @user.address.postcode if @user.address.postcode %></td>
                 </tr>
                 <tr>   
                     <td>Email:</td>

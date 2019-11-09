@@ -3,8 +3,6 @@ class ProfilesController < ApplicationController
     
     def show
         @user = current_user
-        @address = Address.where(user_id: current_user.id)[0]
-        #@user.address
     end
 
     def edit

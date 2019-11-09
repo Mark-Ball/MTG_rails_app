@@ -1,7 +1,3 @@
-//// -- LEVEL 1
-//// -- Tables and References
-
-// Creating tables
 Table users as U {
   id int [pk, increment]
   name string
@@ -11,7 +7,6 @@ Table users as U {
   reset_password_token string
   reset_password_sent_at date
   remember_created_at date
-  created_at date
 }
 
 Table listings {
@@ -23,19 +18,6 @@ Table listings {
 }
 
 Ref: listings.user_id > U.id
-
-Table colors {
-  id int [pk]
-  color string
- }
- 
-Table colors_listing {
-  card_id int
-  color_id int
- }
- 
-Ref: colors_listing.color_id > colors.id
-Ref: colors_listing.card_id > listings.id
 
 Table addresses {
   id int [pk]
@@ -81,16 +63,15 @@ Table cards {
 
 Ref: cards.id < listings.card_id
 
-Table transactions {
+Table purchases {
   id int [pk]
   user_id int
   listing_id int
   purchase_id string
-  transaction_date date
 }
 
-Ref: transactions.user_id > users.id
-Ref: transactions.listing_id - listings.id
+Ref: purchases.user_id > users.id
+Ref: purchases.listing_id - listings.id
 
 Table active_storage_blobs {
   id int [pk]
@@ -100,7 +81,6 @@ Table active_storage_blobs {
   metadata hash
   byte_size int
   checksum string
-  created_at date
 }
 
 Table active_storage_attachments {
@@ -109,7 +89,6 @@ Table active_storage_attachments {
   record_type string
   record_id int
   blob_id int
-  created_at date
 }
 
 Ref: active_storage_attachments.record_id - listings.id

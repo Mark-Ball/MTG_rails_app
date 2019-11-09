@@ -138,13 +138,13 @@ MTG-marketplace uses the PostgreSQL database for the persistent storage of data.
 - addresses
 - listings
 - cards
-- transactions
+- purchases
 - active_storage_blobs
 - active_storage_attachments
 
 For all tables, the attributes collected can be viewed in the ERD diagram in the following section. 
 
-The users table exists to store information regarding individual buyers and sellers on the site.
+The users table exists to store information regarding individual buyers and sellers on the site. This table was created using the Devise gem and the majority of the columns are those provided by default.
 
 The addresses table exists to store the postage address of each user so that sellers know where to send any purchased cards. Addresses are associated with users using a foreign key.
 
@@ -159,30 +159,45 @@ The relationship between users and listings is:
 - <strong>a listing belongs to a user
 - a user has many listings</strong>
 
-The cards table exists to hold all the information for all Magic cards in existence. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the entire set of Magic cards has been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are are hosting the database ourselves.
+The cards table exists to hold all the information for all Magic cards in the most recent set, Throne of Eldraine. The scope was limited because of hosting limits on Heroku, which only permits 10,000 records in the free tier. The reason this table was created was that the magicthegathering.io API, which is used to retrieve records of individual cards, was created as a hobby project by an individual programmer. Therefore the reliability of the service is uncertain. To mitigate this, the Magic cards required have been downloaded to our own database. This improves both the query speed because we will no longer be waiting for responses from an API, and reliability since we are are hosting the database ourselves.
 
 The relationship between cards and listings is:
 - <strong>a listing belongs to a card
 - a card has many listings</strong>
 
-The transactions table exists to hold information about which cards have been sold. This table holds foreign keys for both the listings and users tables and will also contain the purchase id created by Stripe.
+The purchases table exists to hold information about which cards have been sold. This table holds foreign keys for both the listings and users tables and will also contain the purchase id created by Stripe.
 
-The relationship between transactions and users is:
-- <strong>a transaction belongs to a user
-- a user has many transactions</strong>
+The relationship between purchases and users is:
+- <strong>a purchase belongs to a user
+- a user has many purchases</strong>
 
-The relationship between transactions and listings is:
-- <strong>a transaction belongs to a listing
-- a listing has one transaction</strong>
+The relationship between purchases and listings is:
+- <strong>a purchase belongs to a listing
+- a listing has one purchase</strong>
 
-The last tables in the database structure are the active_storage_blobs and active_storage_attachments. The purpose of these tables is to store images which may be associated with either users or listings, meaning that the relationship is polymorphic. Active_storage_blobs contains the information on the image, such as its name and size in bytes. Active_storage_attachments contains the information that links these images to other tables. It does this by including a record attribute, which contains the name of the table the image is associated with. In our app, this will be either users or listings. Secondly it contains a record_id attribute which specifies which record the image is associated with. Record and record_id together identify the table and id which the image is associated with.
+The last tables in the database structure are the active_storage_blobs and active_storage_attachments. The purpose of these tables is to store images which may be associated with either users or cards, meaning that the relationship is polymorphic. Active_storage_blobs contains the information on the image, such as its name and size in bytes. Active_storage_attachments contains the information that links these images to other tables. It does this by including a record attribute, which contains the name of the table the image is associated with. In our app, this will be either users or cards. Secondly it contains a record_id attribute which specifies which record the image is associated with. Record and record_id together identify the table and id which the image is associated with.
 
 The relationships between users, cards, and images are:
 - <strong>a user has one image attached
 - a card has one image attached</strong>
 
 ## ERD
+
+Note: all tables have either a created_at, updated_at, or both columns which are automatically recorded. These have been excluded from the diagram.
+
 ![ERD](/docs/ERD.jpg)
+<strong>Figure X. MTG-marketplace ERD.</strong>
+
+## Sitemap
+
+![sitemap](docs/sitemap.jpg)
+<strong>Figure X. Trello board at end of Day 12</strong>
+
+## Target audience
+
+The target audience for MTG-marketplace is Magic players who either want to increase their collection without buying booster packs or make money selling cards.
+
+Additionally, the site may be of interest to non-players who are interested in speculating on an asset market and see an opportunity for profit in trading Magic cards or as a store of value.
 
 ## Third-party services MTG-marketplace uses
 
@@ -190,7 +205,7 @@ MTG-marketplace used four third-party services:
 - magicthegathering.io
 - Down gem
 - HTTParty gem
-- Stripe
+- Stripe and stripe gem
 - ultrahook and ultrahook gem
 - Devise gem
 
@@ -214,7 +229,11 @@ Down is a Ruby gem used for downloading files. In MTG-marketplace, Down was used
 
 The result was that active_storage_blobs stored each image and active_storage_attachments saved the association between that image and the correct card.
 
-The only use of Down was to seed the database, although in future Down will be used when new sets are released to download the images for those new records. 
+The only use of Down was to seed the database, although in future Down will be used when new sets are released to download the images for those new records.
+
+#### HTTParty gem
+
+HTTParty is a gem used to send http requests programmatically. It was used in this application to repeatedly send 'get' requests to the magicthegathering.io API to download records of cards to our database.
 
 #### Devise gem
 
@@ -226,7 +245,7 @@ One of the most important functions of Devise is to make the 'current_user' vari
 
 Stripe is the payment system used in MTG-marketplace. When users confirm they want to purchase a listing they are redirected to Stripe to enter their credit card details. Once successful they are redirected back to the application, to a page specially set up to congratulate them on their purchase.
 
-The payment processing also integrates webhooks, meaning that the purchase will only be entered into the purchase table in the database once confirmation has been received from Stripe that the checkout was successful.
+The payment processing also integrates webhooks, meaning that the purchase will only be entered into the purchase table once confirmation has been received from Stripe that the checkout was successful.
 
 #### Ultrahook
 
@@ -307,3 +326,6 @@ Screenshots of the Trello board used to track progress through the project are p
 
 ![trello_4](docs/trello_4.jpg)
 <strong>Figure 4. Trello board at end of Day 8</strong>
+
+![trello_4](docs/trello_5.jpg)
+<strong>Figure 5. Trello board at end of Day 12</strong>
