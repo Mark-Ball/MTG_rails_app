@@ -29,10 +29,13 @@ class ProfilesController < ApplicationController
     def my_listings
         #get an array of the user's listing ids
         listings_ids = current_user.listings.ids
+
         #get an array of the sold items listing ids
         sold_ids = Purchase.purchase_ids
+
         #subtract them to get array of ids for items sold by this user which are still available
         still_available = listings_ids - sold_ids
+        
         #passing only listings owned by the user which are still available to the view
         @my_listings = Listing.find(still_available)
         

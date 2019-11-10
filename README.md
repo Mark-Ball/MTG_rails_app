@@ -258,6 +258,7 @@ The following third-party services were used either in the development or the ru
 - Devise gem
 - Amazon S3
 - PostgreSQL
+- Heroku
 
 #### magicthegathering.io
 
@@ -317,6 +318,10 @@ PostgreSQL was the databased used for MTG-marketplace. PostgreSQL is a free, ope
 
 >rails new project_name -d postgresql
 
+#### Heroku
+
+The application is hosted using the cloud hosting provider Heroku. Heroku provides instructions for how to deploy a rails application on the platform, making the deployment easy for the purpose of this project. Lastly, Heroku can also be synchronised with the repo on github, which allows any updates pushed to github to be immediately reflected on the website hosted using Heroku.
+
 ## Tech stack
 
 The following were used in the creation of MTG-marketplace:
@@ -329,67 +334,108 @@ The following were used in the creation of MTG-marketplace:
 
 ## Task planning and tracking
 
-The process of developing MTG-marketplace was characterised by cycles of:
-1. Planning
-2. Development of feature
-3. Testing and code review
-4. Acceptance of code, completion of feature
+Tasks were tracked using trello (see Figures 10-15 below) and planned by considering the dependencies of each feature on other features.
 
-Features were planned sequentially as later features relied upon earlier feature to function. For example card listings cannot be created until the cards table has been created in the database.
+#### Stage 1. Planning
 
-All tasks were tracked with Trello.
+The first tasks completed were those involved in the planning stage of the project, including:
+- Why is this a problem that needs solving?
+- User stories
+- Wireframes
+- ERD
+- relationships between tables
 
-#### Feature 1: The database
-The database is the foundation of the entire application, without which only a static website could be created.
+Each of these steps of the project were completed before the rails project was even created. These features were completed first in the order listed above because the features of the website, and the database structure serve as the foundation for all other parts of the project.
 
-Planning the database included:
-- tables and models to be generated
-- attributes on each table
-- associations between tables
+#### Stage 2. Developing the database
 
-Development of the feature included:
-- creating the database
-- generating and running the migrations
-- writing the planned associations into the relevant models
+In this stage, code was written for the following:
 
-Testing of the feature included running through multiple scenarios where the expected outcome was compared with the actual outcomes. Fixes were implemented if testing revealed errors in the program. Testing of the database involved making sure the following were completed successfully:
-- a user can be created
-- a user can be created with an address correctly associated
-- a card listing can be created
-- a card listing can be created with a user correctly associated
-- a card listing correctly retrieves information from the all_cards table
-- a card can be created with an image correctly associated
-- a user can be created with an image correctly associated
-- cards have colors correctly associated through the join table
+- generating the database migrations
+- writing the associations into the models
 
-When all tests are passed, review of the feature within the overall context of the project is conducted. If no reasons for deviating from the initially planned workflow are given, work on the next feature may begin.
+#### Stage 3. Seeding the database
 
-#### Feature 2: seeding the database with all cards and their images
+The major step of this stage of the project was to seed the cards table with all Magic cards in existance. Although this was accomplished, in the final version of the project, only the records of the most recent set, Throne of Eldraine, were downloaded ot the database.
 
-One of the major design decisions for MTG-marketplace was to take the onus of inputting information regarding their cards away from the user. Instead, a database of all Magic cards and their images was maintained. When a user intends to list a card for sale, they do not need to input all the information regarding the card, nor upload an image of the card. Rather they only need to input the minimum information required to uniquely identify a card: the name of the card and the set. Using this information, the application searches the database for the matching record and returns the image of the card. The user can then confirm that this is the card they wish to list and input the other information which is specific to their listing: the condition of the card and the price they wish to sell at.
+This was done for two reasons:
+1. the time taken to download all the images related to the cards was prohibitively long (estimated 25+ hours)
+2. Heroku limits records to 10,000 in the free tier, whereas the entire database of Magic cards was over 45,000 records
 
-Planning:
-- investigating the gems that could make development easier
+In this stage, the database relations are validated using rails console to make sure that the ORM commands which should be available are functioning.
 
-Development:
+Testing involved making sure the following were possible:
+- a user could be created
+- an address could be associated with a user
+- a listing could be created
+- a listing could be associated with a card and a user
+- an image could be associated with a card
+- a purchase could be created
+- a purchase could be associated with a user and a listing
 
-Testing:
-- a test controller was created (because no controllers had been created at this stage of development) 
+#### Stage 4. Basic features
+
+Once the project has passed all testing for the ORM, the next priority was the development of basic CRUD functionality for listings and users.
+
+This involved the creation of routes, controllers, and views.
+
+#### Stage 5. Security features
+
+After basic CRUD functionality was implemented, it was important to implement security to ensure:
+- users cannot edit or delete listings which are not theirs
+- users cannot edit or delete listings which have been purchased
+- users cannot access or edit profiles which are not theirs
+
+Security features were implemented by providing logic in the controller, as opposed to the view, which can be easily modified by anyone viewing the website to send fraudulent information to the website.
+
+Users were prevent from editing listings which are not theirs by comparing their user id to the listing owner's id. If these did not match, the user is redirected to the listings page.
+
+Similar functionality was implemented to prevent editing or deleting purchased listings. If a user attempts to access the edit page of a listing, it is checked to see if the listing's id is present in the purchases table. If it is then we know that listing has been purchased, and the user is redirected to the listings page.
+
+User were prevented from accessing other users's profile page because the profile page always loads information related to the current_user given by Devise. Therefore no user can ever see a profile (or access the edit functionality) that is not theirs.
+
+#### Stage 6. Advanced features
+
+Once basic features were complete, the next stage was to add advanced features, including:
+- search
+- payment
+
+These features were left until later in the project as they were features which could be cut if there was no time to develop them, but they were in the original plans. Both of these features are present in the final version of MTG-marketplace, but the search functionality is significantly simpler than what was originally planned.
+
+Search was implemented by using a form to send params to the controller, which would then redirect back to the same page. There was then code on the view to display certain information only if there were params which corresponded to the search.
+
+Payment was implemented by redirecting the user to Stripe to enter their credit card information. Once the checkout session on Stripe was completed, webhooks were implemented to ensure that the purchase would only be recorded in the database once confirmation had been received from Stripe that the payment information was valid.
+
+#### Stage 7. Polish
+
+Polishing the website only took place once all core functionality, including advanced features were working correctly. Polish included:
+- styling with CSS
+- attempting to reduce the number of database queries using eager loading
+- DRYing up the controllers by creating instance methods in the models
 
 #### Trello
 Screenshots of the Trello board used to track progress through the project are provided below.
 
 ![trello_1](docs/trello_1.jpg)
-<strong>Figure 1. Trello board at beginning of Day 1</strong>
+
+<strong>Figure 10. Trello board at beginning of Day 1</strong>
 
 ![trello_2](docs/trello_2.jpg)
-<strong>Figure 2. Trello board at end of Day 2</strong>
+
+<strong>Figure 11. Trello board at end of Day 2</strong>
 
 ![trello_3](docs/trello_3.jpg)
-<strong>Figure 3. Trello board at end of Day 5</strong>
+
+<strong>Figure 12. Trello board at end of Day 5</strong>
 
 ![trello_4](docs/trello_4.jpg)
-<strong>Figure 4. Trello board at end of Day 8</strong>
 
-![trello_4](docs/trello_5.jpg)
-<strong>Figure 5. Trello board at end of Day 12</strong>
+<strong>Figure 13. Trello board at end of Day 8</strong>
+
+![trello_5](docs/trello_5.jpg)
+
+<strong>Figure 14. Trello board at end of Day 12</strong>
+
+![trello_6](docs/trello_6.jpg)
+
+<strong>Figure 15. Trello board at end of Day 14</strong>

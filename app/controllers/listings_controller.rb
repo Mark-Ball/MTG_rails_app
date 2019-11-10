@@ -58,8 +58,10 @@ class ListingsController < ApplicationController
     def buy
         #query to find listing to buy
         @listing = Listing.find(params[:id])
+
         #query to find the image attached to the card attached to the listing
         @card_image = @listing.card.image
+        
         #query to find the name attached to the card attached to the listing
         card_name = @listing.card.name
 
@@ -126,7 +128,7 @@ class ListingsController < ApplicationController
         #query to find the correct listing to send to the view
         #eager loading the card associated with the listing
         #then nested eager load the image associated with that card
-        @listing = Listing.includes(card: {image_attachment: :blob}).find(params[:id])
+        @listing = Listing.find(params[:id])
 
         #do not allow access to the edit page of a card that is already purchased
         #instead redirect to listings
@@ -158,11 +160,5 @@ class ListingsController < ApplicationController
         #query to find the correct listing to delete
         Listing.find(params[:id]).destroy
         redirect_to(listings_path)
-    end
-
-    private
-    #not in use yet
-    def set_listing
-        @listing = Listing.find(params[:id])
     end
 end
