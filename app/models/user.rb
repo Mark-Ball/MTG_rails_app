@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :listings
   has_many :purchases
   has_one_attached :image
+  validates :email, presence: true
 end
