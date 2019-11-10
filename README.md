@@ -253,9 +253,9 @@ The following third-party services were used either in the development or the ru
 - magicthegathering.io
 - Down gem
 - HTTParty gem
-- Stripe and stripe gem
-- ultrahook and ultrahook gem
 - Devise gem
+- Stripe and stripe gem
+- Ultrahook and ultrahook gem
 - Amazon S3
 - PostgreSQL
 - Heroku
@@ -326,11 +326,14 @@ The application is hosted using the cloud hosting provider Heroku. Heroku provid
 
 The following were used in the creation of MTG-marketplace:
 - Ruby
-    - Gems: Down, Devise, Stripe, ultrahook, HTTParty
+    - Gems: Down, Devise, Stripe, ultrahook, HTTParty, aws-sdk-s3
 - Rails
+- Postgres database
 - HTML
 - CSS
+- Javascript
 - Heroku
+- Amazon S3
 
 ## Task planning and tracking
 
