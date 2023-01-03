@@ -63,7 +63,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "devise", "~> 4.7"
 
-gem "httparty", "~> 0.17.1"
+gem "httparty", "~> 0.21.0"
 
 gem "down", "~> 5.0"
 
